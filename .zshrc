@@ -76,8 +76,8 @@ DEER_KEYS[leave]=a
 export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools"
 
 function share {
-    require_envs FILE_SERVER_HOST FILER_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
-    ssh_string="$FILE_SERVER_USER@$FILE_SERVER_PATH"
+    require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
+    ssh_string="$FILE_SERVER_USER@$FILE_SERVER_HOST"
 	file=$(basename "$1")
 	if [ $2 ] && [ $2 == ${2%/} ]; then
 		full=${2#/}
@@ -86,8 +86,8 @@ function share {
 		dirs=${2#/}
 		full=${dirs}${file}
 	fi
-	ssh "$ssh_string" mkdir -p "$FILE_SERVER_PATH"${dirs}A
-	res=$(rsync -r $1 "$ssh_string":"$FILE_SERVER_PATH"$full)
+	ssh "$ssh_string" mkdir -p "$FILE_SERVER_PATH"${dirs}
+	res=$(rsync -r "$1" "$ssh_string":"$FILE_SERVER_PATH"$full)
 	if [ $? != 0 ]; then
 		echo $res
 	else
@@ -124,6 +124,7 @@ function mac_startup {
         PATH=$(echo $PATH | tr ':' '\n' | grep -v Java | tr '\n' ':')
         export PATH=$JAVA_HOME/bin:$PATH
     }
+    export ret_status=
 }
 
 function linux_startup {

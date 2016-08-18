@@ -48,3 +48,7 @@
 !.config/terminator
 .config/terminator/*
 !.config/terminator/config
+
+!.iterm2_profile/*
+
+.DS_Store
