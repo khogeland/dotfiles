@@ -124,6 +124,7 @@ function mac_startup {
         PATH=$(echo $PATH | tr ':' '\n' | grep -v Java | tr '\n' ':')
         export PATH=$JAVA_HOME/bin:$PATH
     }
+    setjdk 1.8
     export ret_status=
 }
 
