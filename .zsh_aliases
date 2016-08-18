@@ -1,0 +1,40 @@
+### Dotfiles ###
+alias reload="source ~/.zshrc"
+alias editrc="$EDITOR ~/.zshrc; reload"
+alias vimrc="vim ~/.vimrc"
+
+### Maven ###
+require mvn && {
+    alias mci='mvn clean install'
+    alias mcp='mvn clean package'
+    alias mdt='mvn dependency:tree'
+}
+
+### Sudo ###
+alias ,='sudo '
+alias ,,='history | tail -n 1 | cut -c 8- | sudo -i'
+
+### Screen ###
+require screen && {
+    alias ssx='screen -x -S '
+    alias ss='screen -S '
+}
+
+### Misc ###
+require thefuck && alias fuck='thefuck'
+
+function linux_aliases {
+    require google-chrome-stable && alias chrome='google-chrome-stable %U --high-dpi-support=1 --force-device-scale-factor=1.2'
+}
+
+function mac_aliases {
+    alias chrome-dev="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
+    alias flushdns="sudo discoveryutil mdnsflushcache"
+}
+
+case "$OSTYPE" in
+  darwin*); mac_aliases;;
+  linux*); linux_aliases;;
+esac
+unset -f linux_aliases
+unset -f mac_aliases

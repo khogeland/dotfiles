@@ -1,0 +1,38 @@
+[global_config]
+  borderless = True
+  geometry_hinting = False
+  handle_size = 1
+  inactive_color_offset = 0.88
+  title_font = Source Code Pro Medium 11
+  title_inactive_bg_color = "#09141b"
+  title_inactive_fg_color = "#f0d0ab"
+  title_receive_fg_color = "#000000"
+  title_transmit_bg_color = "#09141b"
+  title_transmit_fg_color = "#ead1b4"
+  title_use_system_font = False
+[keybindings]
+  next_tab = <Primary><Shift>Right
+  prev_tab = <Primary><Shift>Left
+  scaled_zoom = <Primary><Shift>z
+  split_horiz = <Primary><Shift><Alt>d
+  split_vert = <Primary><Shift>d
+  toggle_zoom = <Primary><Shift>Return
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#09141b"
+    background_image = None
+    font = Source Code Pro Medium 13
+    foreground_color = "#deb88d"
+    palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
+    scrollback_lines = 5000
+    scrollbar_position = hidden
+    use_system_font = False

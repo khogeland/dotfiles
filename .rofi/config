@@ -1,0 +1,6 @@
+osh:1: command not found: ------------------------------------------------------------------------------
+r-enabled: true
+rofi.color-window: #09141b, #ead1b4, #ead1b4
+rofi.color-normal: #09141b, #ead1b4, #09141b, #243e4e, #f0dcc3
+rofi.color-active: #09141b, #268bd2, #09141b, #243e4e, #3fa8f2
+rofi.color-urgent: #09141b, #df7673, #09141b, #243e4e, #f9908c
