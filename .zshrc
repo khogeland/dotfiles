@@ -34,6 +34,9 @@ export SSH_KEY_PATH="~/.ssh/id_my"
 # Private config (credentials etc.)
 openssl bf -d -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
 
+# Machine-specific config
+[ -e ~/.zlocal ] && source ~/.zlocal
+
 # Aliases
 source ~/.zsh_aliases
 
