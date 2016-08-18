@@ -49,6 +49,12 @@
 .config/terminator/*
 !.config/terminator/config
 
-!.iterm2_profile/*
+!Library
+Library/*
+!Library/Preferences
+Library/Preferences/*
+!Library/Preferences/com.googlecode.iterm2.plist
+!Library/Preferences/com.amethyst.Amethyst.plist
+!Library/Preferences/org.pqrs.Seil.plist
 
 .DS_Store
