@@ -4,6 +4,13 @@ for_window [class="^.*"] border pixel 0
 for_window [title="Friends"] floating enable #Steam
 exec_always nitrogen --restore
 exec --no-startup-id steam -silent
+exec --no-startup-id volumeicon
+
+# MPD
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPause exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
 
 ##################################3
 

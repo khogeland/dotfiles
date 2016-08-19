@@ -48,6 +48,9 @@
 !.config/terminator
 .config/terminator/*
 !.config/terminator/config
+!.config/volumeicon
+.config/volumeicon/*
+!.config/volumeicon/volumeicon
 
 !Library
 Library/*
