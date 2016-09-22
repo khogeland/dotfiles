@@ -59,5 +59,11 @@ Library/Preferences/*
 !Library/Preferences/com.googlecode.iterm2.plist
 !Library/Preferences/com.amethyst.Amethyst.plist
 !Library/Preferences/org.pqrs.Seil.plist
+!Library/Preferences/org.pqrs.Karabiner.plist
+!Library/Application Support
+Library/Application Support/*
+!Library/Application Support/Karabiner
+Library/Application Support/Karabiner/*
+!Library/Application Support/Karabiner/private.xml
 
 .DS_Store

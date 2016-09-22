@@ -1,4 +1,7 @@
-## Functions for command prerequisites ### 
+# Messy ol' PATH
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools"
+
+# Functions for command prerequisites ### 
 function require_envs {
     rc=0
     for arg in $@; do
@@ -46,19 +49,80 @@ ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_UPDATE="true"
 plugins=(git apache2-macports autojump bower dircycle history pip python sudo web-search colorize cp jvm alias-tips)
 source $ZSH/oh-my-zsh.sh
-export ret_status="%(?:%{$fg_bold[green]%}▶ :%{$fg_bold[red]%}▶ )"
 #################
 
-### SSH prompt ###
-PROMPT_SSH_PREFIX='[xub] '
+
+### Let's git dirty ###
+
+function _git_fetch_origin() {
+    if [ ! -e '.git' ]; then
+        return 0
+    else
+        ({
+            GIT_TERMINAL_PROMPT=0 git fetch origin >/dev/null 2>&1
+            touch .git/.last-origin-fetch
+        } &)
+    fi
+}
+
+function git_commits_ahead_master() {
+    if $(command git rev-parse --git-dir > /dev/null 2>&1)
+    then
+        local COMMITS="$(git rev-list --count master..HEAD)"
+        echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
+    fi
+}
+
+function git_commits_behind_master() {
+    if $(command git rev-parse --git-dir > /dev/null 2>&1)
+    then
+        echo $(git rev-list --count HEAD..master)
+    fi
+}
+
+function _git_behind_master_prompt() {
+    BEHIND=${$(git_commits_behind_master 2>/dev/null):-0}
+    if [ $BEHIND -gt 0 ]; then
+        echo -n "%{$fg_bold[red]%}$BEHIND%{$fg_bold[blue]%}:%{$fg_bold[red]%}"
+    fi
+}
+
+function _git_ahead_master_prompt() {
+    AHEAD=${$(git_commits_ahead_master 2>/dev/null):-0}
+    if [ $AHEAD -gt 0 ]; then
+        echo -n "%{$fg_bold[blue]%}:%{$fg_bold[red]%}$AHEAD"
+    fi
+}
+
+# git info prompt that shows commits head and behind master
+function much_git_prompt_info() {
+    local ref
+    if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]
+    then
+        ref=$(command git symbolic-ref HEAD 2> /dev/null)  || ref=$(command git rev-parse --short HEAD 2> /dev/null)  || return 0
+        echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(_git_behind_master_prompt)${ref#refs/heads/}$(_git_ahead_master_prompt)$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    fi
+}
+
+### Prompt ###
+export ret_status=
+setopt PROMPT_SUBST
+export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
+export PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
+export PERIOD=60
+autoload -Uz add-zsh-hook
+# git-fetch every minute if possible
+add-zsh-hook periodic _git_fetch_origin
+PROMPT_SSH_PREFIX="[$HOST] "
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
     export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
 fi
-##################
+##############
 
 ### Python ###
 alias python=python3
 alias pip=pip3
+export PYTHONPATH="/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages:$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 ##############
 
 ### Deer ###
@@ -75,8 +139,41 @@ DEER_KEYS[enter]=d
 DEER_KEYS[leave]=a
 ############
 
-# Messy ol' PATH
-export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools"
+
+### Process utility ###
+
+function tag_proc {
+    PID=$1
+    shift
+    ps -p "$PID" 2>&1 >/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Process $PID is not running."
+        return 1
+    fi
+    for tag; do
+        TAGDIR="$HOME/.proc/tag/$tag"
+        mkdir -p "$TAGDIR"
+        touch "$TAGDIR/$PID"
+    done
+}
+
+function get_tagged_procs { 
+    TAG=$1
+    TAGDIR="$HOME/.proc/tag/$TAG"
+    if [ ! -e "$TAGDIR" ]; then
+        echo "Tag $TAG does not exist."
+        return 1
+    fi
+    for pidfile in `find $TAGDIR -type f`; do
+        pid=$(basename "$pidfile")
+        ps -p "$pid" >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo rm -f "$pidfile"
+            continue
+        fi
+        echo $pid
+    done
+}
 
 function share {
     require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
@@ -101,12 +198,44 @@ function share {
     fi
 }
 
+### Music ###
+
 function music {
     require -v mpd run-one mpdas ncmpcpp || return 1
     mpd
     run-one mpdas -d
     ncmpcpp
 }
+
+function mpstart {
+    require_envs MPD_USER MPD_HOST || return 1
+    require -v mplayer || return 1
+    ssh "$MPD_USER"@"$MPD_HOST" -NL 6600:127.0.0.1:6600 &
+    tag_proc $! mpd_processes
+    ssh "$MPD_USER"@"$MPD_HOST" -NL 8000:127.0.0.1:8000 &
+    tag_proc $! mpd_processes
+    if [ ! -e ~/.mpslck ]; then
+        touch ~/.mpslck
+        _loop_mplayer &
+    fi
+    disown
+}
+
+function mpstop {
+    rm -f ~/.mpslck
+    pids=`get_tagged_procs mpd_processes`
+    [ $? ] && [ "$pids" != "" ] && echo $pids | xargs kill
+}
+
+function _loop_mplayer {
+    while [ -e ~/.mpslck ]; do
+        mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio http://localhost:8000/stream.ogg -loop 0 &
+        tag_proc $! mpd_processes
+        wait
+    done
+}
+
+##############
 
 function define {
     require_envs MASHAPE_KEY || return 1
@@ -117,7 +246,6 @@ function define {
 
 function mac_startup {
     plugins+=(osx bwana)
-    require trash && alias rm=trash
     function copy {
         $@ | pbcopy
     }
@@ -128,11 +256,10 @@ function mac_startup {
         export PATH=$JAVA_HOME/bin:$PATH
     }
     setjdk 1.8
-    export ret_status=
 }
 
 function linux_startup {
-    # nothing at all
+    export ret_status="%(?:%{$fg_bold[green]%}▶ :%{$fg_bold[red]%}▶ )"
 }
 
 case "$OSTYPE" in

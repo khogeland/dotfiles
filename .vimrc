@@ -1,10 +1,11 @@
-inoremap jj <ESC>
 let mapleader = "\<Space>"
+inoremap jj <ESC>
 vnoremap <ESC> <C-c>
 vnoremap . :norm.<CR>
-set rnu
+map <C-k> <Plug>(easymotion-F)
+map <C-j> <Plug>(easymotion-f)
 
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 autocmd! bufwritepost .vimrc source %
 execute pathogen#infect()
@@ -13,11 +14,11 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set backspace=indent,eol,start
 
 syntax enable
 colorscheme monokai
 set background=dark
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set rnu
+set number

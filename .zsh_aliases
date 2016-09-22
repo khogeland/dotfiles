@@ -22,6 +22,7 @@ require screen && {
 
 ### Misc ###
 require thefuck && alias fuck='thefuck'
+require vim && alias vi='vim'
 
 function linux_aliases {
     require google-chrome-stable && alias chrome='google-chrome-stable %U --high-dpi-support=1 --force-device-scale-factor=1.2'
