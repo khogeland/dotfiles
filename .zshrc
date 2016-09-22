@@ -122,7 +122,7 @@ fi
 ### Python ###
 alias python=python3
 alias pip=pip3
-export PYTHONPATH="/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages:$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
+export PYTHONPATH="/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages::$PYTHONPATH"
 ##############
 
 ### Deer ###
@@ -256,6 +256,7 @@ function mac_startup {
         export PATH=$JAVA_HOME/bin:$PATH
     }
     setjdk 1.8
+    export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 }
 
 function linux_startup {
