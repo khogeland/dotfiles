@@ -168,7 +168,7 @@ function get_tagged_procs {
         pid=$(basename "$pidfile")
         ps -p "$pid" >/dev/null 2>&1
         if [ $? -ne 0 ]; then
-            echo rm -f "$pidfile"
+            rm -f "$pidfile"
             continue
         fi
         echo $pid
