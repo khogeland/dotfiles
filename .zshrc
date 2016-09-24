@@ -68,7 +68,7 @@ function _git_fetch_origin() {
 function git_commits_ahead_master() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        local COMMITS="$(git rev-list --count master..HEAD)"
+        local COMMITS="$(git rev-list --count origin/master..HEAD)"
         echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
     fi
 }
@@ -76,7 +76,7 @@ function git_commits_ahead_master() {
 function git_commits_behind_master() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        echo $(git rev-list --count HEAD..master)
+        echo $(git rev-list --count HEAD..origin/master)
     fi
 }
 
@@ -109,7 +109,7 @@ export ret_status=
 setopt PROMPT_SUBST
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
 export PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
-export PERIOD=60
+export PERIOD=15
 autoload -Uz add-zsh-hook
 # git-fetch every minute if possible
 add-zsh-hook periodic _git_fetch_origin
@@ -231,6 +231,7 @@ function _loop_mplayer {
     while [ -e ~/.mpslck ]; do
         mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio http://localhost:8000/stream.ogg -loop 0 &
         tag_proc $! mpd_processes
+        get_tagged_procs mpd_processes
         wait
     done
 }
