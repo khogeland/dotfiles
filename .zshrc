@@ -35,7 +35,9 @@ export EDITOR=vim
 export SSH_KEY_PATH="~/.ssh/id_my"
 
 # Private config (credentials etc.)
-openssl bf -d -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
+if [ -e ~/.zprivate/key ]; then
+    openssl bf -d -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
+fi
 
 # Machine-specific config
 [ -e ~/.zlocal ] && source ~/.zlocal
@@ -59,7 +61,7 @@ function _git_fetch_origin() {
         return 0
     else
         ({
-            GIT_TERMINAL_PROMPT=0 git fetch origin >/dev/null 2>&1
+            GIT_TERMINAL_PROMPT=0 git fetch origin master >/dev/null 2>&1
             touch .git/.last-origin-fetch
         } &)
     fi
@@ -122,7 +124,6 @@ fi
 ### Python ###
 alias python=python3
 alias pip=pip3
-export PYTHONPATH="/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages::$PYTHONPATH"
 ##############
 
 ### Deer ###
@@ -257,7 +258,6 @@ function mac_startup {
         export PATH=$JAVA_HOME/bin:$PATH
     }
     setjdk 1.8
-    export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 }
 
 function linux_startup {

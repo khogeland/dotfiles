@@ -22,3 +22,9 @@
 [submodule ".vim/bundle/vim-plist"]
 	path = .vim/bundle/vim-plist
 	url = https://github.com/darfink/vim-plist
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule ".vim/bundle/ReplaceWithRegister"]
+	path = .vim/bundle/ReplaceWithRegister
+	url = https://github.com/vim-scripts/ReplaceWithRegister
