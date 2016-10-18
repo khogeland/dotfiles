@@ -239,6 +239,10 @@ function _loop_mplayer {
 
 ##############
 
+function random-str {
+    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
+}
+
 function define {
     require_envs MASHAPE_KEY || return 1
     require -v jq curl || return 1
