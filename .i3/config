@@ -5,6 +5,7 @@ for_window [title="Friends"] floating enable #Steam
 exec_always nitrogen --restore
 exec --no-startup-id steam -silent
 exec --no-startup-id volumeicon
+exec --no-startup-id compton -b
 
 # MPD
 bindsym XF86AudioPlay exec mpc toggle

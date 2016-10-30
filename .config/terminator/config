@@ -17,6 +17,7 @@
   split_horiz = <Primary><Shift><Alt>d
   split_vert = <Primary><Shift>d
   toggle_zoom = <Primary><Shift>Return
+  zoom_in = <Primary>equal
 [layouts]
   [[default]]
     [[[child1]]]

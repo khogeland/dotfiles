@@ -37,6 +37,7 @@
 !.mpd/mpd.conf
 
 !.vimrc
+!.ideavimrc
 !.vim/
 .vim/*
 !.vim/bundle

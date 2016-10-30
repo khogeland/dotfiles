@@ -5,6 +5,8 @@ visualizer_in_stereo = "yes"
 visualizer_look = "+|"
 #visualizer_look = ┃▋
 
+header_text_scrolling = no
+
 #mpd_music_dir = "~/music/"
 clock_display_seconds = "yes"
 
