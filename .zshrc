@@ -211,15 +211,12 @@ function music {
 function mpstart {
     require_envs MPD_USER MPD_HOST || return 1
     require -v mplayer || return 1
-    ssh "$MPD_USER"@"$MPD_HOST" -NL 6600:127.0.0.1:6600 &
+    ssh "$MPD_USER"@"$MPD_HOST" -NL 6600:127.0.0.1:6600 & disown
     tag_proc $! mpd_processes
-    ssh "$MPD_USER"@"$MPD_HOST" -NL 8000:127.0.0.1:8000 &
+    ssh "$MPD_USER"@"$MPD_HOST" -NL 8000:127.0.0.1:8000 & disown
     tag_proc $! mpd_processes
-    if [ ! -e ~/.mpslck ]; then
-        touch ~/.mpslck
-        _loop_mplayer &
-    fi
-    disown
+    touch ~/.mpslck
+    _loop_mplayer >/dev/null 2>&1 & disown
 }
 
 function mpstop {
@@ -232,7 +229,8 @@ function _loop_mplayer {
     while [ -e ~/.mpslck ]; do
         mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio http://localhost:8000/stream.ogg -loop 0 &
         tag_proc $! mpd_processes
-        get_tagged_procs mpd_processes
+        get_tagged_procs mpd_processes >/dev/null
+        sleep 1
         wait
     done
 }
@@ -278,3 +276,4 @@ unset -f linux_startup
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
