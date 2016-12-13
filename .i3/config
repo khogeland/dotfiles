@@ -63,7 +63,8 @@ bindsym Mod4+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym Mod4+space exec --no-startup-id i3-dmenu-desktop
-bindsym Mod4+space exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -config ~/.rofi/config'
+#bindsym Mod4+space exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -config ~/.rofi/config'
+bindsym Mod4+space exec --no-startup-id rofi -show drun -i -config ~/.rofi/config
 
 # change focus
 bindsym Mod4+$left focus left
