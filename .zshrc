@@ -115,7 +115,7 @@ export PERIOD=15
 autoload -Uz add-zsh-hook
 # git-fetch every minute if possible
 add-zsh-hook periodic _git_fetch_origin
-PROMPT_SSH_PREFIX="[$HOST] "
+PROMPT_SSH_PREFIX="[`hostname -s`] "
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
     export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
 fi
