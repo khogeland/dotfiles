@@ -39,9 +39,6 @@ if [ -e ~/.zprivate/key ]; then
     openssl bf -d -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
 fi
 
-# Machine-specific config
-[ -e ~/.zlocal ] && source ~/.zlocal
-
 # Aliases
 source ~/.zsh_aliases
 
@@ -51,6 +48,9 @@ ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_UPDATE="true"
 plugins=(git apache2-macports autojump bower dircycle history pip python sudo web-search colorize cp jvm alias-tips)
 source $ZSH/oh-my-zsh.sh
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^T^E" edit-command-line
 #################
 
 
@@ -132,12 +132,12 @@ zle -N deer-launch
 bindkey '^k' deer-launch
 alias rifle=open
 typeset -Ag DEER_KEYS
-DEER_KEYS[up]=w
-DEER_KEYS[page_up]=W
-DEER_KEYS[down]=s
-DEER_KEYS[page_down]=S
-DEER_KEYS[enter]=d
-DEER_KEYS[leave]=a
+DEER_KEYS[up]=i
+DEER_KEYS[page_up]=I
+DEER_KEYS[down]=e
+DEER_KEYS[page_down]=E
+DEER_KEYS[enter]=o
+DEER_KEYS[leave]=n
 ############
 
 
@@ -209,12 +209,8 @@ function music {
 }
 
 function mpstart {
-    require_envs MPD_USER MPD_HOST || return 1
+    require_envs MPD_STREAM_ADDRESS || return 1
     require -v mplayer || return 1
-    ssh "$MPD_USER"@"$MPD_HOST" -NL 6600:127.0.0.1:6600 & disown
-    tag_proc $! mpd_processes
-    ssh "$MPD_USER"@"$MPD_HOST" -NL 8000:127.0.0.1:8000 & disown
-    tag_proc $! mpd_processes
     touch ~/.mpslck
     _loop_mplayer >/dev/null 2>&1 & disown
 }
@@ -227,7 +223,7 @@ function mpstop {
 
 function _loop_mplayer {
     while [ -e ~/.mpslck ]; do
-        mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio http://localhost:8000/stream.ogg -loop 0 &
+        mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio $MPD_STREAM_ADDRESS -loop 0 &
         tag_proc $! mpd_processes
         get_tagged_procs mpd_processes >/dev/null
         sleep 1
@@ -276,4 +272,7 @@ unset -f linux_startup
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Machine-specific config
+[ -e ~/.zlocal ] && source ~/.zlocal
 
