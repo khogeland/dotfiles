@@ -1,5 +1,5 @@
 let mapleader = "\<Space>"
-inoremap jj <ESC>
+inoremap yy <ESC>
 vnoremap <ESC> <C-c>
 vnoremap . :norm.<CR>
 map <C-k> <Plug>(easymotion-F)

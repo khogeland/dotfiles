@@ -4,8 +4,7 @@ for_window [class="^.*"] border pixel 0
 for_window [title="Friends"] floating enable #Steam
 exec_always nitrogen --restore
 exec --no-startup-id steam -silent
-exec --no-startup-id volumeicon
-exec --no-startup-id compton -b
+exec --no-startup-id compton --vsync opengl -b
 
 # MPD
 bindsym XF86AudioPlay exec mpc toggle
@@ -43,10 +42,10 @@ font pango:monospace 8
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
+set $up i
+set $down e
+set $left n
+set $right o
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
@@ -102,7 +101,7 @@ bindsym Mod4+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym Mod4+s layout stacking
 bindsym Mod4+w layout tabbed
-bindsym Mod4+e layout toggle split
+bindsym Mod4+t layout toggle split
 
 # toggle tiling / floating
 bindsym Mod4+Shift+space floating toggle
@@ -187,5 +186,5 @@ bar {
         #yo I don't need all that shit just show me what time it is
         status_command exec sh -c "while true; do date +'%a %D %I:%M'; sleep 1; done"
         mode hide
-        output DP-2
+        output DP-0.8
 }

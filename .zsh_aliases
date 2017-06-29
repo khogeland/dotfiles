@@ -27,6 +27,7 @@ require rsync && alias rsyncp='rsync -avz --no-i-r --info=progress2'
 alias c=clear
 alias re='grep -oP'
 alias wh=whence
+alias psg='ps aux | grep -i'
 
 function linux_aliases {
     require google-chrome-stable && alias chrome='google-chrome-stable %U --high-dpi-support=1 --force-device-scale-factor=1.2'
