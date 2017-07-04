@@ -65,6 +65,8 @@ bindsym Mod4+Shift+q kill
 #bindsym Mod4+space exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -config ~/.rofi/config'
 bindsym Mod4+space exec --no-startup-id rofi -show drun -i -config ~/.rofi/config
 
+force_focus_wrapping yes
+
 # change focus
 bindsym Mod4+$left focus left
 bindsym Mod4+$down focus down
