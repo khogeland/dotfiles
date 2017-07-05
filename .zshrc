@@ -113,6 +113,22 @@ export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
 export PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
 export PERIOD=15
 autoload -Uz add-zsh-hook
+### Cursor ###
+
+zle-keymap-select () {
+    if [ "$TERM" = "xterm-256color" ]; then
+        if [ $KEYMAP = vicmd ]; then
+            # the command mode for vi
+            echo -ne "\e[2 q"
+        else
+            # the insert mode for vi
+            echo -ne "\e[4 q"
+        fi
+    fi
+}
+
+#############
+
 # git-fetch every minute if possible
 add-zsh-hook periodic _git_fetch_origin
 PROMPT_SSH_PREFIX="[`hostname -s`] "
