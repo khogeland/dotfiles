@@ -253,6 +253,13 @@ function random-str {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
 }
 
+function swapf {
+    temp=".$1"`random-str`
+    mv "$1" "$temp" && \
+    mv "$2" "$1" && \
+    mv "$temp" "$2"
+}
+
 function define {
     require_envs MASHAPE_KEY || return 1
     require -v jq curl || return 1
