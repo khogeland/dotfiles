@@ -260,6 +260,10 @@ function swapf {
     mv "$temp" "$2"
 }
 
+function pcol {
+    awk '{print $'"$1"'}'
+}
+
 function define {
     require_envs MASHAPE_KEY || return 1
     require -v jq curl || return 1
