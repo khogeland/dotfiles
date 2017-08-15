@@ -4,7 +4,7 @@ vnoremap <ESC> <C-c>
 vnoremap . :norm.<CR>
 map <C-k> <Plug>(easymotion-F)
 map <C-j> <Plug>(easymotion-f)
-
+nnoremap <Leader><Esc> <C-w>
 set clipboard=unnamed
 
 autocmd! bufwritepost .vimrc source %
