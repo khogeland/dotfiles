@@ -1,22 +1,3 @@
-tab {
-  background-color: #09141B
-}
-
-notebook tab {
-  min-height: 0;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-notebook tab button {
-  min-height: 0;
-  min-width: 0;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.terminator-terminal-window .notebook { padding: 0; background-color: #09141b; -GtkNotebook-initial-gap: 6; -GtkNotebook-arrow-spacing: 5; -GtkNotebook-tab-curvature: 0; -GtkNotebook-tab-overlap: 1; -GtkNotebook-has-tab-gap: false; -GtkWidget-focus-padding: 0; -GtkWidget-focus-line-width: 0; }
-
 .terminator-terminal-window .notebook.frame { border: 1px solid rgba(0, 0, 0, 0.11); }
 
 .terminator-terminal-window .notebook.frame.top { border-top-color: #09141b; }
