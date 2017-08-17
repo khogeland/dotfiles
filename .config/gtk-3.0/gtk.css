@@ -1,0 +1,106 @@
+tab {
+  background-color: #09141B
+}
+
+notebook tab {
+  min-height: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+notebook tab button {
+  min-height: 0;
+  min-width: 0;
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.terminator-terminal-window .notebook { padding: 0; background-color: #09141b; -GtkNotebook-initial-gap: 6; -GtkNotebook-arrow-spacing: 5; -GtkNotebook-tab-curvature: 0; -GtkNotebook-tab-overlap: 1; -GtkNotebook-has-tab-gap: false; -GtkWidget-focus-padding: 0; -GtkWidget-focus-line-width: 0; }
+
+.terminator-terminal-window .notebook.frame { border: 1px solid rgba(0, 0, 0, 0.11); }
+
+.terminator-terminal-window .notebook.frame.top { border-top-color: #09141b; }
+
+.terminator-terminal-window .notebook.frame.bottom { border-bottom-color: #09141b; }
+
+.terminator-terminal-window .notebook.frame.left { border-left-color: #09141b; }
+
+.terminator-terminal-window .notebook.frame.right { border-right-color: #09141b; }
+
+.terminator-terminal-window .notebook.header { background-color: #3e515a; }
+
+.terminator-terminal-window .notebook.header.frame { border: none; }
+
+.terminator-terminal-window .notebook.header.top { box-shadow: inset 0 -1px rgba(0, 0, 0, 0.11); }
+
+.terminator-terminal-window .notebook.header.bottom { box-shadow: inset 0 1px rgba(0, 0, 0, 0.11); }
+
+.terminator-terminal-window .notebook.header.left { box-shadow: inset -1px 0 rgba(0, 0, 0, 0.11); }
+
+.terminator-terminal-window .notebook.header.right { box-shadow: inset 1px 0 rgba(0, 0, 0, 0.11); }
+
+.terminator-terminal-window .notebook tab { outline-offset: 0; border-width: 0; border-style: solid; border-color: transparent; background-color: transparent; }
+
+.terminator-terminal-window .notebook tab.top, .notebook tab.bottom { padding: 0 0; }
+
+.terminator-terminal-window .notebook tab.left, .notebook tab.right { padding: 0 0; }
+
+.terminator-terminal-window .notebook tab.reorderable-page { -GtkNotebook-tab-overlap: 1; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.top, .notebook tab.reorderable-page.bottom { padding-left: 1.2em; padding-right: 1.2em; border-left-width: 1px; border-right-width: 1px; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.left, .notebook tab.reorderable-page.right { border-bottom-width: 1px; border-top-width: 1px; }
+
+.terminator-terminal-window .notebook tab:hover, .notebook tab.prelight-page { border-color: alpha(currentColor, 0.2); }
+
+.terminator-terminal-window .notebook tab:active, .notebook tab.active-page { border-color: #00BCD4; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.top { border-color: transparent; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.top:hover, .notebook tab.reorderable-page.top.prelight-page { border-color: rgba(0, 0, 0, 0.11); border-bottom-width: 1px; border-bottom-color: rgba(0, 0, 0, 0.11); background-color: #09141b; box-shadow: none; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.top:active, .notebook tab.reorderable-page.top.active-page { border-color: rgba(0, 0, 0, 0.11); border-bottom-width: 2px; border-bottom-color: #00BCD4; background-color: #09141b; box-shadow: -1px 0 2px rgba(0, 0, 0, 0.02), -1px 0 4px rgba(0, 0, 0, 0.03), 1px 0 2px rgba(0, 0, 0, 0.02), 1px 0 4px rgba(0, 0, 0, 0.03); }
+
+.terminator-terminal-window .notebook tab.reorderable-page.bottom { border-color: transparent; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.bottom:hover, .notebook tab.reorderable-page.bottom.prelight-page { border-color: rgba(0, 0, 0, 0.11); border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.11); background-color: #09141b; box-shadow: none; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.bottom:active, .notebook tab.reorderable-page.bottom.active-page { border-color: rgba(0, 0, 0, 0.11); border-top-width: 2px; border-top-color: #00BCD4; background-color: #09141b; box-shadow: -1px 0 2px rgba(0, 0, 0, 0.02), -1px 0 4px rgba(0, 0, 0, 0.03), 1px 0 2px rgba(0, 0, 0, 0.02), 1px 0 4px rgba(0, 0, 0, 0.03); }
+
+.terminator-terminal-window .notebook tab.reorderable-page.left { border-color: transparent; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.left:hover, .notebook tab.reorderable-page.left.prelight-page { border-color: rgba(0, 0, 0, 0.11); border-right-width: 1px; border-right-color: rgba(0, 0, 0, 0.11); background-color: #09141b; box-shadow: none; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.left:active, .notebook tab.reorderable-page.left.active-page { border-color: rgba(0, 0, 0, 0.11); border-right-width: 2px; border-right-color: #00BCD4; background-color: #09141b; box-shadow: -1px 0 2px rgba(0, 0, 0, 0.02), -1px 0 4px rgba(0, 0, 0, 0.03), 1px 0 2px rgba(0, 0, 0, 0.02), 1px 0 4px rgba(0, 0, 0, 0.03); }
+
+.terminator-terminal-window .notebook tab.reorderable-page.right { border-color: transparent; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.right:hover, .notebook tab.reorderable-page.right.prelight-page { border-color: rgba(0, 0, 0, 0.11); border-left-width: 1px; border-left-color: rgba(0, 0, 0, 0.11); background-color: #09141b; box-shadow: none; }
+
+.terminator-terminal-window .notebook tab.reorderable-page.right:active, .notebook tab.reorderable-page.right.active-page { border-color: rgba(0, 0, 0, 0.11); border-left-width: 2px; border-left-color: #00BCD4; background-color: #09141b; box-shadow: -1px 0 2px rgba(0, 0, 0, 0.02), -1px 0 4px rgba(0, 0, 0, 0.03), 1px 0 2px rgba(0, 0, 0, 0.02), 1px 0 4px rgba(0, 0, 0, 0.03); }
+
+.terminator-terminal-window .notebook tab .label { padding: 0.5em; font-weight: 700; color: rgba(236, 239, 241, 0.5); }
+
+.terminator-terminal-window .notebook tab .prelight-page .label, .notebook tab .label.prelight-page { color: #ECEFF1; }
+
+.terminator-terminal-window .notebook tab .active-page .label, .notebook tab .label.active-page { color: #ECEFF1; }
+
+.terminator-terminal-window .notebook tab .button { padding: 0; background-size: 3.75em 3.75em, auto; background-color: transparent; color: rgba(236, 239, 241, 0.5); }
+
+.terminator-terminal-window .notebook tab .button:hover { background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to(alpha(currentColor, 0)), to(transparent)), linear-gradient(to bottom, alpha(currentColor, 0.1)); box-shadow: none; }
+
+.terminator-terminal-window .notebook tab .button:active { box-shadow: none; animation: flat_ripple_effect 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+.terminator-terminal-window .notebook tab .button:insensitive { background-color: transparent; box-shadow: none; }
+
+.terminator-terminal-window .notebook tab .button > GtkImage { padding: 0.6em; }
+
+.terminator-terminal-window .notebook tab .prelight-page .button, .notebook tab:hover .button { color: #ECEFF1; }
+
+.terminator-terminal-window .notebook tab .active-page .button, .notebook tab:active .button { color: #ECEFF1; }
+
+.terminator-terminal-window .notebook.arrow { color: rgba(236, 239, 241, 0.5); }
+
+.terminator-terminal-window .notebook.arrow:hover, .notebook.arrow:active { color: #ECEFF1; }
+
+.terminator-terminal-window .notebook.arrow:insensitive { color: transparent; }

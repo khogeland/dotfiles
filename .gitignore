@@ -46,12 +46,18 @@
 
 !.config
 .config/*
+
 !.config/terminator
 .config/terminator/*
 !.config/terminator/config
+
 !.config/volumeicon
 .config/volumeicon/*
 !.config/volumeicon/volumeicon
+
+!.config/gtk-3.0
+.config/gtk-3.0/*
+!.config/gtk-3.0/gtk.css
 
 !Library
 Library/*
