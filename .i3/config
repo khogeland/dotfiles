@@ -3,7 +3,10 @@
 for_window [class="^.*"] border pixel 0
 for_window [title="Friends"] floating enable #Steam
 for_window [title="mouse-something"] floating enable
+for_window [title="terminator-visor"] floating enable
+for_window [title="terminator-visor"] move scratchpad
 exec_always nitrogen --restore
+exec --no-startup-id terminator -T terminator-visor -p visor
 exec --no-startup-id xsetroot -solid "#002244"
 exec --no-startup-id steam -silent
 exec --no-startup-id compton --vsync opengl -b
@@ -54,6 +57,9 @@ floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec i3-sensible-terminal
+
+bindsym Mod4+k exec i3-msg '[title="terminator-visor"] scratchpad show'
+bindsym Mod4+Shift+k exec --no-startup-id terminator -T terminator-visor -p visor
 
 # kill focused window
 bindsym Mod4+Shift+q kill
