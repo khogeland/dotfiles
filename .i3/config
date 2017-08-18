@@ -64,6 +64,9 @@ bindsym Mod4+Shift+k exec --no-startup-id terminator -T terminator-visor -p viso
 # kill focused window
 bindsym Mod4+Shift+q kill
 
+# lock
+bindsym Mod4+Shift+l exec i3lock --color 000000
+
 # start dmenu (a program launcher)
 #bindsym Mod4+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
