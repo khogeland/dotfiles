@@ -1,6 +1,6 @@
 ##################################3
 
-for_window [class="^.*"] border pixel 0
+#for_window [class="^.*"] border pixel 0
 for_window [title="Friends"] floating enable #Steam
 for_window [title="mouse-something"] floating enable
 for_window [title="terminator-visor"] floating enable
@@ -117,7 +117,7 @@ bindsym Mod4+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym Mod4+s layout stacking
-bindsym Mod4+w layout tabbed
+#bindsym Mod4+w layout tabbed
 bindsym Mod4+t layout toggle split
 
 # toggle tiling / floating

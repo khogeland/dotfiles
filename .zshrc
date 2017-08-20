@@ -142,6 +142,11 @@ alias python=python3
 alias pip=pip3
 ##############
 
+### Go ###
+export GOPATH=$HOME/go
+require go && export PATH="$PATH:$(go env GOPATH)/bin"
+##########
+
 ### Deer ###
 source ~/.zsh/deer/deer
 zle -N deer-launch
