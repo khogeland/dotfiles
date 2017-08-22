@@ -23,6 +23,11 @@ require screen && {
 ### Git ###
 alias gad='git add .'
 
+### Nim ###
+require nim && {
+    alias nr='nim c -r --verbosity:0'
+}
+
 ### Misc ###
 require thefuck && alias fuck='thefuck'
 require vim && alias vi='vim'
