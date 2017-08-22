@@ -57,7 +57,7 @@ bindkey "^Y" edit-command-line
 ### Let's git dirty ###
 
 function _git_fetch_origin() {
-    if [ ! -e '.git' ]; then
+    if [[ ! -e '.git' || ! -d '.git' ]]; then
         return 0
     else
         ({
@@ -254,6 +254,13 @@ function _loop_mplayer {
 
 ##############
 
+### Nim ###
+
+export NIMBIN="$HOME/nim/bin"
+export PATH="$PATH:$NIMBIN"
+
+###########
+
 function random-str {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
 }
@@ -288,6 +295,7 @@ function mac_startup {
         export PATH=$JAVA_HOME/bin:$PATH
     }
     setjdk 1.8
+    export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
 }
 
 function linux_startup {

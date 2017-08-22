@@ -48,3 +48,4 @@ let g:neomake_info_sign = {
   \ }
 
 nnoremap <Leader>nr :! nim c -r --verbosity:0 %<CR>
+nnoremap <Leader>ni :! nim c -d:release "-o:$NIMBIN/"`basename "%" .nim` "%"<CR>

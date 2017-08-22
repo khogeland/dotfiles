@@ -1,1 +1,1 @@
-/home/kevin/.vimrc
+source ~/.vimrc
