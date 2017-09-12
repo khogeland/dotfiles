@@ -1,5 +1,5 @@
 # Messy ol' PATH
-export PATH="$HOME/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin"
+export PATH="$HOME/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin"
 
 # Functions for command prerequisites ### 
 function require_envs {
@@ -110,9 +110,35 @@ function much_git_prompt_info() {
 export ret_status=
 setopt PROMPT_SUBST
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
-export PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
+export PROMPT='${ret_status}%{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
 export PERIOD=15
 autoload -Uz add-zsh-hook
+
+# git-fetch every minute if possible
+add-zsh-hook periodic _git_fetch_origin
+PROMPT_SSH_PREFIX="[`hostname -s`] "
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+    export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
+fi
+
+# Short prompt
+export LONG_PROMPT="$PROMPT"
+export SHORT_PROMPT='%{$fg[cyan]%}%c%{$reset_color%}$ '
+function check-short-prompt {
+    LP=`eval "echo $LONG_PROMPT"`
+    LP=`eval 'echo "${(%)LP}"' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"`
+    prompt_len=$(echo "$LP" | wc -m)
+    if [[ $(($COLUMNS - 15)) -lt $prompt_len ]]; then
+        export PROMPT="$SHORT_PROMPT"
+    else
+        export PROMPT="$LONG_PROMPT"
+    fi
+
+}
+add-zsh-hook precmd check-short-prompt
+
+##############
+
 ### Cursor ###
 
 zle-keymap-select () {
@@ -128,14 +154,6 @@ zle-keymap-select () {
 }
 
 #############
-
-# git-fetch every minute if possible
-add-zsh-hook periodic _git_fetch_origin
-PROMPT_SSH_PREFIX="[`hostname -s`] "
-if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
-    export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
-fi
-##############
 
 ### Python ###
 alias python=python3
@@ -299,7 +317,7 @@ function mac_startup {
 }
 
 function linux_startup {
-    export ret_status="%(?:%{$fg_bold[green]%}▶ :%{$fg_bold[red]%}▶ )"
+    export ret_status="%(?:%{$fg_bold[green]%}▶ :%{$fg_bold[red]%}▶ )%{$reset_color%}"
 }
 
 case "$OSTYPE" in

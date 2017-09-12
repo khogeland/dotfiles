@@ -30,9 +30,10 @@
 [plugins]
 [profiles]
   [[default]]
+    allow_bold = False
     background_color = "#09141b"
     cursor_color = "#deb88d"
-    font = Source Code Pro Light 15
+    font = Source Code Pro Light 14
     foreground_color = "#deb88d"
     palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
     scrollback_lines = 5000
@@ -44,7 +45,7 @@
     background_type = transparent
     cursor_color = "#deb88d"
     exit_action = restart
-    font = Source Code Pro Light 15
+    font = Source Code Pro Light 14
     foreground_color = "#deb88d"
     palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
     scrollback_lines = 5000

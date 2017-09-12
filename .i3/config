@@ -4,6 +4,7 @@
 for_window [title="Friends"] floating enable #Steam
 for_window [title="mouse-something"] floating enable
 for_window [title="terminator-visor"] floating enable
+for_window [title="somegame"] floating enable
 for_window [title="terminator-visor"] move scratchpad
 exec_always nitrogen --restore
 exec --no-startup-id terminator -T terminator-visor -p visor
