@@ -7,6 +7,7 @@ map <C-k> <Plug>(easymotion-F)
 map <C-j> <Plug>(easymotion-f)
 nnoremap <Leader><Esc> <C-w>
 set clipboard=unnamed
+set nofoldenable
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -46,8 +47,8 @@ if termapp=~"iTerm.app"
     let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
 endif
 
-autocmd! BufRead * Neomake
-autocmd! BufWritePost * Neomake
+"autocmd! BufRead * Neomake
+"autocmd! BufWritePost * Neomake
 "let g:nvim_nim_enable_default_binds = 0
 
 let g:neomake_warning_sign = {

@@ -22,6 +22,8 @@ require screen && {
 
 ### Git ###
 alias gad='git add .'
+alias gds='git diff --staged'
+alias gcur='git_current_branch'
 
 ### Nim ###
 require nim && {
@@ -55,6 +57,7 @@ function linux_aliases {
 function mac_aliases {
     alias chrome-dev="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
     alias flushdns="sudo discoveryutil mdnsflushcache"
+    alias ij='open -b com.jetbrains.intellij.ce'
 }
 
 case "$OSTYPE" in

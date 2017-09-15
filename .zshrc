@@ -82,17 +82,14 @@ function git_commits_behind_master() {
     fi
 }
 
-function _git_behind_master_prompt() {
-    BEHIND=${$(git_commits_behind_master 2>/dev/null):-0}
-    if [ $BEHIND -gt 0 ]; then
-        echo -n "%{$fg_bold[red]%}$BEHIND%{$fg_bold[blue]%}:%{$fg_bold[red]%}"
-    fi
-}
+export GIT_COLOR_DIRTY="%{$fg_bold[red]%}"
+export GIT_COLOR_CLEAN="%{$fg_bold[blue]%}"
 
-function _git_ahead_master_prompt() {
-    AHEAD=${$(git_commits_ahead_master 2>/dev/null):-0}
-    if [ $AHEAD -gt 0 ]; then
-        echo -n "%{$fg_bold[blue]%}:%{$fg_bold[red]%}$AHEAD"
+function _git_color() {
+    if git diff-index --quiet HEAD --; then
+        echo -n "$GIT_COLOR_CLEAN"
+    else
+        echo -n "$GIT_COLOR_DIRTY"
     fi
 }
 
@@ -102,15 +99,30 @@ function much_git_prompt_info() {
     if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]
     then
         ref=$(command git symbolic-ref HEAD 2> /dev/null)  || ref=$(command git rev-parse --short HEAD 2> /dev/null)  || return 0
-        echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(_git_behind_master_prompt)${ref#refs/heads/}$(_git_ahead_master_prompt)$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+        color_one="$(_git_color)"
+        color_two="%{$reset_color%}%{$fg[green]%}"
+        BEHIND=${$(git_commits_behind_master 2>/dev/null):-0}
+        BEHIND_PROMPT=
+        if [ $BEHIND -gt 0 ]; then
+            BEHIND_PROMPT="${color_one}$BEHIND${color_two}:"
+        fi
+        AHEAD=${$(git_commits_ahead_master 2>/dev/null):-0}
+        AHEAD_PROMPT=
+        if [ $AHEAD -gt 0 ]; then
+            AHEAD_PROMPT="${color_two}:${color_one}$AHEAD"
+        fi
+        echo "${color_two}(${color_one}${BEHIND_PROMPT}${color_one}${ref#refs/heads/}${AHEAD_PROMPT}${color_two})"
     fi
 }
-
 ### Prompt ###
-export ret_status=
 setopt PROMPT_SUBST
+export status_dollar="%(?:%{$fg_bold[blue]%}$:%{$fg_bold[red]%}$)%{$reset_color%}"
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
-export PROMPT='${ret_status}%{$fg[cyan]%}%c%{$reset_color%} $(much_git_prompt_info)'
+export PROMPT='$(much_git_prompt_info) %{$fg[yellow]%}%c%{$reset_color%} ${status_dollar} '
+
+export LONG_PROMPT="$PROMPT"
+export SHORT_PROMPT='%{$fg[yellow]%}%c%{$reset_color%}${status_dollar} '
+
 export PERIOD=15
 autoload -Uz add-zsh-hook
 
@@ -122,20 +134,18 @@ if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
 fi
 
 # Short prompt
-export LONG_PROMPT="$PROMPT"
-export SHORT_PROMPT='%{$fg[cyan]%}%c%{$reset_color%}$ '
 function check-short-prompt {
-    LP=`eval "echo $LONG_PROMPT"`
+    LP=`eval "echo \"$LONG_PROMPT\""`
     LP=`eval 'echo "${(%)LP}"' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"`
     prompt_len=$(echo "$LP" | wc -m)
-    if [[ $(($COLUMNS - 15)) -lt $prompt_len ]]; then
+    if [[ $(($COLUMNS - 30)) -lt $prompt_len ]]; then
         export PROMPT="$SHORT_PROMPT"
     else
         export PROMPT="$LONG_PROMPT"
     fi
 
 }
-add-zsh-hook precmd check-short-prompt
+#add-zsh-hook precmd check-short-prompt
 
 ##############
 
@@ -317,7 +327,6 @@ function mac_startup {
 }
 
 function linux_startup {
-    export ret_status="%(?:%{$fg_bold[green]%}▶ :%{$fg_bold[red]%}▶ )%{$reset_color%}"
 }
 
 case "$OSTYPE" in
