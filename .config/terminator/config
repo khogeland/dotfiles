@@ -1,5 +1,4 @@
 [global_config]
-  borderless = True
   handle_size = 1
   inactive_color_offset = 0.88
   scroll_tabbar = True

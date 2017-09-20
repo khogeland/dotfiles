@@ -66,6 +66,7 @@ let g:neomake_info_sign = {
 
 nnoremap <Leader>nr :! nim c -r --threads:on --verbosity:0 %<CR>
 nnoremap <Leader>ni :! nim c -d:release --threads:on "-o:$NIMBIN/"`basename "%" .nim` "%"<CR>
+nnoremap <Leader>nd :! nim c --threads:on "-o:$NIMBIN/"`basename "%" .nim` "%"<CR>
 nnoremap <Leader>no :NimOutline<CR>
 
 let g:syntastic_always_populate_loc_list = 1
