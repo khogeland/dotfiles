@@ -143,7 +143,6 @@ function check-short-prompt {
     else
         export PROMPT="$LONG_PROMPT"
     fi
-
 }
 #add-zsh-hook precmd check-short-prompt
 
@@ -225,29 +224,6 @@ function get_tagged_procs {
     done
 }
 
-function share {
-    require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
-    ssh_string="$FILE_SERVER_USER@$FILE_SERVER_HOST"
-    file=$(basename "$1")
-    if [ $2 ] && [ $2 == ${2%/} ]; then
-        full=${2#/}
-        dirs=$(dirname "$full")
-    else
-        dirs=${2#/}
-        full=${dirs}${file}
-    fi
-    ssh "$ssh_string" mkdir -p "$FILE_SERVER_PATH"${dirs}
-    res=$(rsync -r "$1" "$ssh_string":"$FILE_SERVER_PATH"$full)
-    if [ $? != 0 ]; then
-        echo $res
-    else
-        url="$FILE_SERVER_URL"$full
-        echo $url
-        require pbcopy && echo $url | pbcopy
-        require xclip && echo $url | xclip -i -selection clipboard
-    fi
-}
-
 ### Music ###
 
 function music {
@@ -288,6 +264,35 @@ export NIMBIN="$HOME/nim/bin"
 export PATH="$PATH:$NIMBIN"
 
 ###########
+
+### Misc ###
+
+function share {
+    require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
+    ssh_string="$FILE_SERVER_USER@$FILE_SERVER_HOST"
+    file=$(basename "$1")
+    if [ $2 ] && [ $2 == ${2%/} ]; then
+        full=${2#/}
+        dirs=$(dirname "$full")
+    else
+        dirs=${2#/}
+        full=${dirs}${file}
+    fi
+    ssh "$ssh_string" mkdir -p "$FILE_SERVER_PATH"${dirs}
+    res=$(rsync -r "$1" "$ssh_string":"$FILE_SERVER_PATH"$full)
+    if [ $? != 0 ]; then
+        echo $res
+    else
+        url="$FILE_SERVER_URL"$full
+        echo $url
+        require pbcopy && echo $url | pbcopy
+        require xclip && echo $url | xclip -i -selection clipboard
+    fi
+}
+
+function grepl {
+    grep --color=always $@ | less -R
+}
 
 function random-str {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
