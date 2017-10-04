@@ -79,6 +79,8 @@ nnoremap <Leader>ni :! nim c -d:release --threads:on "-o:$NIMBIN/"`basename "%" 
 nnoremap <Leader>nd :! nim c --threads:on "-o:$NIMBIN/"`basename "%" .nim` "%"<CR>
 nnoremap <Leader>no :NimOutline<CR>
 
+nnoremap <Leader>W :InteractiveWindow<CR>
+
 function! JavaAskAndRename()
     let wordUnderCursor = expand("<cword>")
     call inputsave()
