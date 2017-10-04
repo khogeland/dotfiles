@@ -31,7 +31,11 @@ function require {
 }
 ###########################################
 
-export EDITOR=vim
+export VISUAL=vi
+require vim && export VISUAL=vim
+require nvim && export VISUAL=nvim
+export EDITOR="$VISUAL"
+
 export SSH_KEY_PATH="~/.ssh/id_my"
 
 # Private config (credentials etc.)
@@ -104,7 +108,7 @@ function much_git_prompt_info() {
         BEHIND=${$(git_commits_behind_master 2>/dev/null):-0}
         BEHIND_PROMPT=
         if [ $BEHIND -gt 0 ]; then
-            BEHIND_PROMPT="${color_one}$BEHIND${color_two}:"
+            BEHIND_PROMPT="${GIT_COLOR_DIRTY}$BEHIND${color_two}:"
         fi
         AHEAD=${$(git_commits_ahead_master 2>/dev/null):-0}
         AHEAD_PROMPT=

@@ -61,3 +61,6 @@
 [submodule ".vim/bundle/ag.vim"]
 	path = .vim/bundle/ag.vim
 	url = https://github.com/rking/ag.vim
+[submodule ".vim/bundle/winteract.vim"]
+	path = .vim/bundle/winteract.vim
+	url = https://github.com/romgrk/winteract.vim
