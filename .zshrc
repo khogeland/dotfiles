@@ -271,6 +271,10 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+require irssi run-one && function irc {
+    screen -R -m -S irc run-one irssi
+}
+
 function share {
     require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
     ssh_string="$FILE_SERVER_USER@$FILE_SERVER_HOST"
