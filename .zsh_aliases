@@ -27,9 +27,9 @@ alias gcur='git_current_branch'
 
 ### Nim ###
 require nim && {
-    alias nr='nim c -r --verbosity:0'
+    alias nr='nim c -r --verbosity:0 --threads:on'
     function nimi {
-        nim c -d:release "-o:$NIMBIN/"`basename "$1" .nim` "$1"
+        nim c -d:release --threads:on "-o:$NIMBIN/"`basename "$1" .nim` "$1"
     }
 }
 
@@ -40,7 +40,9 @@ require nvim && {
 }
 
 ### Misc ###
-require thefuck && alias fuck='thefuck'
+
+require irssi run-one screen && function irc { screen -dRmS irc run-one irssi }
+
 require vim && alias vi='vim'
 require rsync && alias rsyncp='rsync -avz --no-i-r --info=progress2'
 alias c=clear

@@ -106,3 +106,5 @@ endif
 let g:ycm_semantic_triggers['nim'] = ['.']
 let g:ycm_auto_trigger = 0
 let g:ycm_min_num_identifier_candidate_chars = 2
+
+nnoremap <Leader>t :execute 'CommandT' fnameescape(getcwd())<CR>

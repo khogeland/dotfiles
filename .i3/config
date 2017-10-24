@@ -3,14 +3,16 @@
 #for_window [class="^.*"] border pixel 0
 for_window [title="Friends"] floating enable #Steam
 for_window [title="mouse-something"] floating enable
-for_window [title="terminator-visor"] floating enable
 for_window [title="somegame"] floating enable
+for_window [title="terminator-omnim"] floating enable
+for_window [title="terminator-omnim"] move scratchpad
+for_window [title="terminator-visor"] floating enable
 for_window [title="terminator-visor"] move scratchpad
 exec_always nitrogen --restore
 exec --no-startup-id terminator -T terminator-visor -p visor
 exec --no-startup-id xsetroot -solid "#002244"
 exec --no-startup-id steam -silent
-exec --no-startup-id compton --vsync opengl -b
+#exec --no-startup-id compton --vsync opengl -b
 
 # MPD
 bindsym XF86AudioPlay exec mpc toggle
@@ -58,6 +60,9 @@ floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec i3-sensible-terminal
+
+bindsym Mod4+m exec i3-msg '[title="terminator-omnim"] scratchpad show'
+bindsym Mod4+Shift+m exec --no-startup-id terminator -T terminator-omnim -p visor -x 'exec /home/kevin/nim/bin/omnim'
 
 bindsym Mod4+k exec i3-msg '[title="terminator-visor"] scratchpad show'
 bindsym Mod4+Shift+k exec --no-startup-id terminator -T terminator-visor -p visor
@@ -118,7 +123,7 @@ bindsym Mod4+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym Mod4+s layout stacking
-#bindsym Mod4+w layout tabbed
+bindsym Mod4+w layout tabbed
 bindsym Mod4+t layout toggle split
 
 # toggle tiling / floating
@@ -180,16 +185,25 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 5 px or 5 ppt
+        bindsym $down       resize grow height 5 px or 5 ppt
+        bindsym $up         resize shrink height 5 px or 5 ppt
+        bindsym $right      resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 5 px or 5 ppt
+        bindsym Down        resize grow height 5 px or 5 ppt
+        bindsym Up          resize shrink height 5 px or 5 ppt
+        bindsym Right       resize grow width 5 px or 5 ppt
+
+        bindsym Shift+$left       resize shrink width 1 px or 1 ppt
+        bindsym Shift+$down       resize grow height 1 px or 1 ppt
+        bindsym Shift+$up         resize shrink height 1 px or 1 ppt
+        bindsym Shift+$right      resize grow width 1 px or 1 ppt
+        bindsym Shift+Left        resize shrink width 1 px or 1 ppt
+        bindsym Shift+Down        resize grow height 1 px or 1 ppt
+        bindsym Shift+Up          resize shrink height 1 px or 1 ppt
+        bindsym Shift+Right       resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -198,11 +212,15 @@ mode "resize" {
 
 bindsym Mod4+r mode "resize"
 
+workspace 1 output DP-2
+workspace 2 output DP-0
+workspace 3 output DP-4
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         #yo I don't need all that shit just show me what time it is
         status_command exec sh -c "while true; do date +'%a %D %I:%M'; sleep 1; done"
         mode hide
-        output DP-0.8
+        output DP-0
 }
