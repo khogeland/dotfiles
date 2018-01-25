@@ -24,6 +24,7 @@ require screen && {
 alias gad='git add .'
 alias gds='git diff --staged'
 alias gcur='git_current_branch'
+alias gdh='git diff HEAD~1..HEAD'
 
 ### Nim ###
 require nim && {
@@ -37,6 +38,18 @@ require nim && {
 require nvim && {
     alias vi='nvim'
     alias vim='nvim'
+    require nvr && {
+        alias vi='_nvim'
+        alias vim='_nvim'
+        function _nvim {
+            if [ "$NVIM_LISTEN_ADDRESS" = "" ]; then
+                nvim $@
+            else
+                # Making wild assumptions here
+                nvr -o $@
+            fi
+        }
+    }
 }
 
 ### Misc ###

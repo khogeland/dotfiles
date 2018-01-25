@@ -1,22 +1,47 @@
+autocmd! bufwritepost .vimrc source %
+
 set rtp^=~/.vim/
 let mapleader = "\<Space>"
 inoremap yy <ESC>
+tnoremap yy <C-\><C-n>
 vnoremap <ESC> <C-c>
 vnoremap . :norm.<CR>
 map <C-k> <Plug>(easymotion-F)
 map <C-j> <Plug>(easymotion-f)
 nnoremap <Leader>w <C-w>
+nnoremap <Leader>w\ <C-w>\| <C-w>_
 set clipboard=unnamed
 set nofoldenable
 set ignorecase
 set smartcase
 set cursorline
+set wildignore+=*/target/*
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+function! LeftWindowOrTab(column)
+    if a:column <= winwidth(winnr()) "leftmost window
+        tabp
+    else
+        wincmd h
+    endif
+endfunction
 
-autocmd! bufwritepost .vimrc source %
+function! RightWindowOrTab(column)
+    if a:column >= &columns - winwidth(winnr()) "rightmost window
+        tabn
+    else
+        wincmd l
+    endif
+endfunction
+
+nnoremap <M-e> <C-w>j
+nnoremap <M-i> <C-w>k
+nnoremap <silent> <M-n> :call LeftWindowOrTab(screencol())<CR>
+nnoremap <silent> <M-o> :call RightWindowOrTab(screencol())<CR>
+nnoremap <M-S-e> <C-w>J
+nnoremap <M-S-i> <C-w>K
+nnoremap <M-S-n> <C-w>H
+nnoremap <M-S-o> <C-w>L
+nnoremap <M-w> :InteractiveWindow<CR>
 
 let g:pathogen_disabled = []
 
@@ -79,8 +104,6 @@ nnoremap <Leader>ni :! nim c -d:release --threads:on "-o:$NIMBIN/"`basename "%" 
 nnoremap <Leader>nd :! nim c --threads:on "-o:$NIMBIN/"`basename "%" .nim` "%"<CR>
 nnoremap <Leader>no :NimOutline<CR>
 
-nnoremap <Leader>W :InteractiveWindow<CR>
-
 function! JavaAskAndRename()
     let wordUnderCursor = expand("<cword>")
     call inputsave()
@@ -108,3 +131,19 @@ let g:ycm_auto_trigger = 0
 let g:ycm_min_num_identifier_candidate_chars = 2
 
 nnoremap <Leader>t :execute 'CommandT' fnameescape(getcwd())<CR>
+let g:CommandTAcceptSelectionSplitMap = "<CR>"
+let g:CommandTAcceptSelectionMap = "<C-CR>"
+
+if has('nvim')
+    let $VISUAL = 'nvr -cc split --remote-wait'
+endif
+
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
+command! -nargs=* TSP tab split <args>
+
+cabbr <expr> %% expand('%:p:h')
+
+if has('unix')
+    set clipboard+=unnamedplus
+endif

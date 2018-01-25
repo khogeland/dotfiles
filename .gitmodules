@@ -65,3 +65,9 @@
 [submodule ".vim/bundle/winteract.vim"]
 	path = .vim/bundle/winteract.vim
 	url = https://github.com/romgrk/winteract.vim
+[submodule "git/mouse-grid"]
+	path = git/mouse-grid
+	url = git@github.com:khogeland/mouse-grid.git
+[submodule "git/rofi-lpass"]
+	path = git/rofi-lpass
+	url = https://github.com/Mange/rofi-lpass

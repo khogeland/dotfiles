@@ -8,10 +8,14 @@ for_window [title="terminator-omnim"] floating enable
 for_window [title="terminator-omnim"] move scratchpad
 for_window [title="terminator-visor"] floating enable
 for_window [title="terminator-visor"] move scratchpad
+for_window [title="^Dungeon Crawl Stone Soup.+"] floating enable
+for_window [title="^Dungeon Crawl Stone Soup.+"] move scratchpad
+for_window [title="^Dungeon Crawl Stone Soup.+"] resize set 1400 1200
 exec_always nitrogen --restore
 exec --no-startup-id terminator -T terminator-visor -p visor
 exec --no-startup-id xsetroot -solid "#002244"
 exec --no-startup-id steam -silent
+exec --no-startup-id ~/bin/greenclip daemon
 #exec --no-startup-id compton --vsync opengl -b
 
 # MPD
@@ -67,6 +71,9 @@ bindsym Mod4+Shift+m exec --no-startup-id terminator -T terminator-omnim -p viso
 bindsym Mod4+k exec i3-msg '[title="terminator-visor"] scratchpad show'
 bindsym Mod4+Shift+k exec --no-startup-id terminator -T terminator-visor -p visor
 
+bindsym Mod4+c exec i3-msg '[title="^Dungeon Crawl Stone Soup.+"] scratchpad show'
+bindsym Mod4+Shift+c exec /usr/games/crawl-tiles
+
 # kill focused window
 bindsym Mod4+Shift+q kill
 
@@ -83,10 +90,12 @@ bindsym Mod4+Shift+l exec i3lock --color 000000
 bindsym Mod4+space exec --no-startup-id rofi -show drun -i -config ~/.rofi/config
 bindsym Mod4+Tab exec --no-startup-id rofi -show window -i -config ~/.rofi/config
 bindsym Mod4+Shift+Tab exec --no-startup-id skippy-xd
+bindsym Mod4+l exec --no-startup-id rofi -modi lpass:~/git/rofi-lpass/rofi-lpass -show lpass -i -config ~/.rofi/config
+bindsym Mod4+Shift+v exec --no-startup-id rofi -modi "clipboard:~/bin/greenclip print" -show clipboard -i -config ~/.rofi/config
 
 force_focus_wrapping yes
 
-bindsym Mod4+u exec --no-startup-id python3 ~/PycharmProjects/mouse-grid/mouse.py
+bindsym Mod4+u exec --no-startup-id python3 ~/git/mouse-grid/mouse.py
 
 # change focus
 bindsym Mod4+$left focus left
@@ -170,7 +179,7 @@ bindsym Mod4+Shift+9 move container to workspace 9
 bindsym Mod4+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym Mod4+Shift+c reload
+#bindsym Mod4+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym Mod4+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -222,5 +231,4 @@ bar {
         #yo I don't need all that shit just show me what time it is
         status_command exec sh -c "while true; do date +'%a %D %I:%M'; sleep 1; done"
         mode hide
-        output DP-0
 }

@@ -10,9 +10,24 @@
   title_transmit_fg_color = "#ead1b4"
   title_use_system_font = False
 [keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
+  edit_window_title = None
+  go_down = None
+  go_left = None
   go_next = <Primary><Shift><Alt>n
+  go_right = None
+  go_up = None
+  group_all = None
+  hide_window = None
+  layout_launcher = None
+  new_terminator = None
   next_tab = <Primary><Shift>o
+  page_down_half = <Shift>Page_Down
+  page_up_half = <Shift>Page_Up
   prev_tab = <Primary><Shift>n
+  rotate_cw = None
   scaled_zoom = <Primary><Shift>z
   split_horiz = <Primary><Shift><Alt>d
   split_vert = <Primary><Shift>d
@@ -32,16 +47,22 @@
   [[default]]
     allow_bold = False
     background_color = "#09141b"
+    background_image = None
     cursor_color = "#deb88d"
-    font = Source Code Pro Light 14
+    custom_command = /bin/zsh --login
+    font = Source Code Pro 12
     foreground_color = "#deb88d"
+    login_shell = True
     palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
+    scroll_on_output = False
     scrollback_lines = 5000
     scrollbar_position = hidden
+    use_custom_command = True
     use_system_font = False
   [[visor]]
     background_color = "#09141b"
     background_darkness = 0.9
+    background_image = None
     background_type = transparent
     cursor_color = "#deb88d"
     exit_action = restart

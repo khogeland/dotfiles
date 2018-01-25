@@ -1,6 +1,11 @@
 # Whitelisting with .gitignore requires this weird dance
 
 /*
+
+!bin/
+bin/*
+!bin/greenclip
+
 !.git/
 !.gitignore
 !.gitmodules
@@ -78,3 +83,4 @@ Library/Application Support/Karabiner/*
 !Library/Application Support/Karabiner/private.xml
 
 .DS_Store
+doc/tags

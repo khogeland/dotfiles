@@ -148,7 +148,7 @@ function check-short-prompt {
         export PROMPT="$LONG_PROMPT"
     fi
 }
-#add-zsh-hook precmd check-short-prompt
+add-zsh-hook precmd check-short-prompt
 
 ##############
 
@@ -271,6 +271,23 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+function daemon {
+    $@ &>/dev/null &
+}
+
+mkdir -p ~/notes
+
+function note {
+    $EDITOR ~/notes/$@
+}
+
+function rmnote {
+    rm ~/notes/$1
+}
+
+compdef "_files -W ~/notes" note
+compdef "_files -W ~/notes" rmnote
+
 function share {
     require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
     ssh_string="$FILE_SERVER_USER@$FILE_SERVER_HOST"
@@ -300,6 +317,30 @@ function grepl {
 
 function random-str {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
+}
+
+export _SCRATCH_DIR="$HOME/.scratch"
+export _SCRATCH=false
+export _SCRATCH_BEFORE_DIR="$PWD"
+
+function scratch {
+    if [[ $_SCRATCH != true ]]; then
+        if [[ -a "$_SCRATCH_DIR" ]]; then
+            rm -rf "$_SCRATCH_DIR"
+        fi
+        mkdir "$_SCRATCH_DIR"
+        export _SCRATCH=true
+    fi
+    test "${PWD##$_SCRATCH_DIR}" != "${PWD}" || {
+        export _SCRATCH_BEFORE_DIR="$PWD"
+    }
+    cd "$_SCRATCH_DIR"
+}
+
+function unscratch {
+    cd "$_SCRATCH_BEFORE_DIR" || cd ~
+    rm -rf "$_SCRATCH_DIR"
+    export _SCRATCH=false
 }
 
 function swapf {
