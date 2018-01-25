@@ -119,6 +119,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "type": "style" }
 
 au BufNewFile,BufRead *.nim set filetype=nim
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -147,3 +148,4 @@ cabbr <expr> %% expand('%:p:h')
 if has('unix')
     set clipboard+=unnamedplus
 endif
+let g:syntastic_python_flake8_post_args='--ignore=E501'

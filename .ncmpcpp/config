@@ -24,3 +24,5 @@ mouse_support = no
 
 mpd_host = 127.0.0.1
 mpd_port = 6600
+
+song_columns_list_format = (20)[]{a} (6f)[green]{NE} (35)[white]{t|f:Title} (25)[cyan]{b} (10)[green]{g} (10)[magenta]{l}
