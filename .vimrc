@@ -17,8 +17,12 @@ set smartcase
 set cursorline
 set wildignore+=*/target/*
 
+python3 import vim
+
 function! LeftWindowOrTab(column)
-    if a:column <= winwidth(winnr()) "leftmost window
+    " I really have to do this shit to get the position of the current window
+    let wincol = py3eval("vim.windows[" . winnr() . " - 1].col")
+    if wincol == 0 "leftmost window
         tabp
     else
         wincmd h
