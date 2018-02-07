@@ -122,10 +122,7 @@ function much_git_prompt_info() {
 setopt PROMPT_SUBST
 export status_dollar="%(?:%{$fg_bold[blue]%}$:%{$fg_bold[red]%}$)%{$reset_color%}"
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
-export PROMPT='$(much_git_prompt_info) %{$fg[yellow]%}%c%{$reset_color%} ${status_dollar} '
-
-export LONG_PROMPT="$PROMPT"
-export SHORT_PROMPT='%{$fg[yellow]%}%c%{$reset_color%}${status_dollar} '
+export PROMPT='%{$fg[yellow]%}%c%{$reset_color%} ${status_dollar} '
 
 export PERIOD=15
 autoload -Uz add-zsh-hook
@@ -137,20 +134,69 @@ if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
     export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
 fi
 
-# Short prompt
-function check-short-prompt {
-    LP=`eval "echo \"$LONG_PROMPT\""`
-    LP=`eval 'echo "${(%)LP}"' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"`
-    prompt_len=$(echo "$LP" | wc -m)
-    if [[ $(($COLUMNS - 30)) -lt $prompt_len ]]; then
-        export PROMPT="$SHORT_PROMPT"
-    else
-        export PROMPT="$LONG_PROMPT"
-    fi
+function rprompt_cmd {
+    much_git_prompt_info
 }
-add-zsh-hook precmd check-short-prompt
 
-##############
+############## <copied stuff>
+# Thanks to Anish Athalye for the very useful code below!
+#
+#**Copyright (c) 2013-2015 Anish Athalye (me@anishathalye.com)**
+
+#Permission is hereby granted, free of charge, to any person obtaining a copy of
+#this software and associated documentation files (the "Software"), to deal in
+#the Software without restriction, including without limitation the rights to
+#use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+#of the Software, and to permit persons to whom the Software is furnished to do
+#so, subject to the following conditions:
+
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+
+RPROMPT=''
+
+ASYNC_PROC=0
+function precmd() {
+    function async() {
+        # save to temp file
+        printf "%s" "$(rprompt_cmd)" > "/tmp/zsh_prompt_$$"
+
+        # signal parent
+        kill -s USR1 $$
+    }
+
+    # do not clear RPROMPT, let it persist
+
+    # kill child if necessary
+    if [[ "${ASYNC_PROC}" != 0 ]]; then
+        kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    fi
+
+    # start background computation
+    async &!
+    ASYNC_PROC=$!
+}
+
+function TRAPUSR1() {
+    # read from temp file
+    RPROMPT="$(cat /tmp/zsh_prompt_$$)"
+
+    # reset proc number
+    ASYNC_PROC=0
+
+    # redisplay
+    zle && zle reset-prompt
+}
+
+############## </copied stuff>
 
 ### Cursor ###
 
