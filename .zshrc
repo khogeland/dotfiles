@@ -115,7 +115,7 @@ function much_git_prompt_info() {
         if [ $AHEAD -gt 0 ]; then
             AHEAD_PROMPT="${color_two}:${color_one}$AHEAD"
         fi
-        echo "${color_two}(${color_one}${BEHIND_PROMPT}${color_one}${ref#refs/heads/}${AHEAD_PROMPT}${color_two})"
+        echo "${color_two}(${color_one}${BEHIND_PROMPT}${color_one}${ref#refs/heads/}${AHEAD_PROMPT}${color_two})%{$reset_color%}"
     fi
 }
 ### Prompt ###
