@@ -134,8 +134,14 @@ if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
     export PROMPT="$PROMPT_SSH_PREFIX$PROMPT"
 fi
 
+if [ "$COPY_MODE" ]; then
+    export PROMPT="$ "
+fi
+
 function rprompt_cmd {
-    much_git_prompt_info
+    if [ ! "$COPY_MODE" ]; then
+        much_git_prompt_info
+    fi
 }
 
 ############## <copied stuff>
@@ -317,6 +323,14 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+function recsh {
+    script -q -c "COPY_MODE=true $SHELL -i" /tmp/recsh
+    # holy shit
+    # the python part is probably possible to replace with a recursive regex, but... no thanks
+    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | python -c "import re; import sys; t = lambda l1: (lambda l2: l1 if l1 == l2 else t(l2))(re.sub('($|[^\b])\b','',l1)); print(t(sys.stdin.read()), end='')" | col -b | eval "$SYSTEM_CLIP_COMMAND"
+    #rm /tmp/recsh
+}
+
 function daemon {
     $@ &>/dev/null &
 }
@@ -420,9 +434,11 @@ function mac_startup {
     }
     setjdk 1.8
     export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+    export SYSTEM_CLIP_COMMAND="pbcopy"
 }
 
 function linux_startup {
+    export SYSTEM_CLIP_COMMAND="xclip -selection c"
 }
 
 case "$OSTYPE" in
