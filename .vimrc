@@ -153,3 +153,6 @@ if has('unix')
     set clipboard+=unnamedplus
 endif
 let g:syntastic_python_flake8_post_args='--ignore=E501'
+
+" Complete to longest match rather than first full command
+set wildmode=longest:full,full

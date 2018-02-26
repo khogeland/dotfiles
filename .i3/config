@@ -78,7 +78,7 @@ bindsym Mod4+Shift+c exec /usr/games/crawl-tiles
 bindsym Mod4+Shift+q kill
 
 # lock
-bindsym Mod4+Shift+l exec i3lock --color 000000
+bindsym Mod4+Shift+l exec ~/bin/lock-i3-dunst
 
 # start dmenu (a program launcher)
 #bindsym Mod4+space exec dmenu_run

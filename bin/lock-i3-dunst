@@ -1,0 +1,4 @@
+#!/bin/zsh
+pkill -x -USR1 dunst
+i3lock -n -c 000000
+pkill -x -USR2 dunst

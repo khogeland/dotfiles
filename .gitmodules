@@ -19,12 +19,15 @@
 [submodule ".vim/bundle/vim-plist"]
 	path = .vim/bundle/vim-plist
 	url = https://github.com/darfink/vim-plist
+[submodule ".vim/bundle/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround
 [submodule ".vim/bundle/ReplaceWithRegister"]
 	path = .vim/bundle/ReplaceWithRegister
-	url = https://github.com/vim-scripts/ReplaceWithRegister
+	url = https://github.com/khogeland/ReplaceWithRegister
 [submodule ".vim/bundle/unite-outline"]
 	path = .vim/bundle/unite-outline
 	url = https://github.com/Shougo/unite-outline
@@ -39,7 +42,7 @@
 	url = https://github.com/neomake/neomake
 [submodule ".vim/bundle/vim-operator-user"]
 	path = .vim/bundle/vim-operator-user
-	url = https://github.com/kana/vim-operator-user
+	url = https://github.com/khogeland/vim-operator-user
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe
