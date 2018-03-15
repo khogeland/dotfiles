@@ -13,6 +13,8 @@ bin/*
 
 !README.md
 
+!.crawlrc
+
 !.zprivate/
 .zprivate/*
 !.zprivate/dec.sh
