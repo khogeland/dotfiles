@@ -156,3 +156,21 @@ let g:syntastic_python_flake8_post_args='--ignore=E501'
 
 " Complete to longest match rather than first full command
 set wildmode=longest:full,full
+
+let s:simple = 0
+function! ToggleStatusLines()
+    if s:simple == 0
+        set laststatus=0
+        set noruler
+        set noshowcmd
+        set noshowmode
+        let s:hidden=1
+    else
+        set laststatus=2
+        set ruler
+        set showcmd
+        set showmode
+        let s:hidden=0
+    endif
+endfunction
+

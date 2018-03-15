@@ -69,6 +69,16 @@ bin/*
 .config/nvim/*
 !.config/nvim/init.nvim
 
+!.config/unity3d
+.config/unity3d/*
+!.config/unity3d/Freehold Games
+.config/unity3d/Freehold Games/*
+!.config/unity3d/Freehold Games/CavesOfQud
+.config/unity3d/Freehold Games/CavesOfQud/*
+!.config/unity3d/Freehold Games/CavesOfQud/*.Keymap.xml
+.config/unity3d/Freehold Games/CavesOfQud/UserPrefs.json
+.config/unity3d/Freehold Games/CavesOfQud/PlayerOptions.json
+
 !Library
 Library/*
 !Library/Preferences

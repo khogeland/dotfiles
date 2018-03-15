@@ -65,7 +65,7 @@ function _git_fetch_origin() {
         return 0
     else
         ({
-            GIT_TERMINAL_PROMPT=0 git fetch origin master >/dev/null 2>&1
+            GIT_TERMINAL_PROMPT=0 git fetch origin master 2>/dev/null
             touch .git/.last-origin-fetch
         } &)
     fi
@@ -74,7 +74,7 @@ function _git_fetch_origin() {
 function git_commits_ahead_master() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        local COMMITS="$(git rev-list --count origin/master..HEAD)"
+        local COMMITS="$(git rev-list --count origin/master..HEAD)" 2>/dev/null
         echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
     fi
 }
@@ -82,7 +82,7 @@ function git_commits_ahead_master() {
 function git_commits_behind_master() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        echo $(git rev-list --count HEAD..origin/master)
+        echo $(git rev-list --count HEAD..origin/master) 2>/dev/null
     fi
 }
 
@@ -90,7 +90,7 @@ export GIT_COLOR_DIRTY="%{$fg_bold[red]%}"
 export GIT_COLOR_CLEAN="%{$fg_bold[blue]%}"
 
 function _git_color() {
-    if git diff-index --quiet HEAD --; then
+    if git diff-index --quiet HEAD -- >/dev/null 2>&1; then
         echo -n "$GIT_COLOR_CLEAN"
     else
         echo -n "$GIT_COLOR_DIRTY"
@@ -347,6 +347,11 @@ function rmnote {
 
 compdef "_files -W ~/notes" note
 compdef "_files -W ~/notes" rmnote
+
+function recsh {
+    script -q -c "COPY_MODE=true $SHELL -i" /dev/fd/3 3>/tmp/recsh
+    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b | eval "$SYSTEM_CLIP_COMMAND"
+}
 
 function share {
     require_envs FILE_SERVER_HOST FILE_SERVER_USER FILE_SERVER_PATH FILE_SERVER_URL || return 1
