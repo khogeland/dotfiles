@@ -323,11 +323,24 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+function untgz {
+    file="$1"
+    contents=$(tar -tf "$file")
+    size=$(wc -l)<<<"$contents"
+    if [ $(grep -Pc '^[^(?<=\\)/]+/' <<<"$contents") = $size ]; then
+        tar -xzvf "$file"
+    else
+        filename=$(basename "$file")
+        dirname=$(grep -oP ".+(?=\\.tar\\.gz|\\.tgz)") <<<"$filename"
+        mkdir "$dirname" && tar -C "$dirname" -xzvf "$file"
+    fi
+}
+
 function recsh {
     script -q -c "COPY_MODE=true $SHELL -i" /tmp/recsh
     # holy shit
     # the python part is probably possible to replace with a recursive regex, but... no thanks
-    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | python -c "import re; import sys; t = lambda l1: (lambda l2: l1 if l1 == l2 else t(l2))(re.sub('($|[^\b])\b','',l1)); print(t(sys.stdin.read()), end='')" | col -b | eval "$SYSTEM_CLIP_COMMAND"
+    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | python -c "import re; import sys; t = lambda l1: (lambda l2: l1 if l1 == l2 else t(l2))(re.sub('($|[^\b])\b','',l1)); print(t(sys.stdin.read()), end='')" | col -b | copy
     #rm /tmp/recsh
 }
 
@@ -350,7 +363,7 @@ compdef "_files -W ~/notes" rmnote
 
 function recsh {
     script -q -c "COPY_MODE=true $SHELL -i" /dev/fd/3 3>/tmp/recsh
-    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b | eval "$SYSTEM_CLIP_COMMAND"
+    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b | copy
 }
 
 function share {
@@ -439,11 +452,11 @@ function mac_startup {
     }
     setjdk 1.8
     export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
-    export SYSTEM_CLIP_COMMAND="pbcopy"
+    alias copy="pbcopy"
 }
 
 function linux_startup {
-    export SYSTEM_CLIP_COMMAND="xclip -selection c"
+    alias copy="xclip -selection c"
 }
 
 case "$OSTYPE" in
@@ -460,3 +473,5 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Machine-specific config
 [ -e ~/.zlocal ] && source ~/.zlocal
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

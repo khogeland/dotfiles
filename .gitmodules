@@ -74,3 +74,6 @@
 [submodule "git/rofi-lpass"]
 	path = git/rofi-lpass
 	url = https://github.com/Mange/rofi-lpass
+[submodule "git/fzf"]
+	path = git/fzf
+	url = https://github.com/junegunn/fzf

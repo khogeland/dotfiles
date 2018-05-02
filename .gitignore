@@ -27,6 +27,7 @@ bin/*
 !.zprofile
 !.zsh_aliases
 !.oh-my-zsh
+!.fzf.zsh
 
 !.i3/
 .i3/*

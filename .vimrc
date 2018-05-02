@@ -10,6 +10,7 @@ map <C-k> <Plug>(easymotion-F)
 map <C-j> <Plug>(easymotion-f)
 nnoremap <Leader>w <C-w>
 nnoremap <Leader>w\ <C-w>\| <C-w>_
+nnoremap <Leader>W :InteractiveWindow<CR>
 set clipboard=unnamed
 set nofoldenable
 set ignorecase

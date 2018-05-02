@@ -8,9 +8,9 @@ for_window [title="terminator-omnim"] floating enable
 for_window [title="terminator-omnim"] move scratchpad
 for_window [title="terminator-visor"] floating enable
 for_window [title="terminator-visor"] move scratchpad
-for_window [title="^Dungeon Crawl Stone Soup.+"] floating enable
-for_window [title="^Dungeon Crawl Stone Soup.+"] move scratchpad
-for_window [title="^Dungeon Crawl Stone Soup.+"] resize set 1400 1200
+for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] floating enable
+for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] move scratchpad
+for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] resize set 1400 1200
 exec_always nitrogen --restore
 exec --no-startup-id terminator -T terminator-visor -p visor
 exec --no-startup-id xsetroot -solid "#002244"
