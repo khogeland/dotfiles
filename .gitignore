@@ -6,6 +6,7 @@
 bin/*
 !bin/greenclip
 !bin/lock-i3-dunst
+!bin/neovim-autocd.py
 
 !.git/
 !.gitignore

@@ -43,9 +43,6 @@
 [submodule ".vim/bundle/vim-operator-user"]
 	path = .vim/bundle/vim-operator-user
 	url = https://github.com/khogeland/vim-operator-user
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic
@@ -77,3 +74,15 @@
 [submodule "git/fzf"]
 	path = git/fzf
 	url = https://github.com/junegunn/fzf
+[submodule ".vim/bundle/deoplete.nvim"]
+	path = .vim/bundle/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim
+[submodule ".vim/bundle/deoplete-zsh"]
+	path = .vim/bundle/deoplete-zsh
+	url = https://github.com/zchee/deoplete-zsh
+[submodule ".vim/bundle/deoplete-jedi"]
+	path = .vim/bundle/deoplete-jedi
+	url = https://github.com/zchee/deoplete-jedi
+[submodule ".vim/bundle/neco-syntax"]
+	path = .vim/bundle/neco-syntax
+	url = https://github.com/Shougo/neco-syntax

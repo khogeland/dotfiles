@@ -1,8 +1,3 @@
-### Dotfiles ###
-alias reload="source ~/.zshrc"
-alias editrc="$EDITOR ~/.zshrc; reload"
-alias vimrc="vim ~/.vimrc"
-
 ### Maven ###
 require mvn && {
     alias mci='mvn clean install'
@@ -25,34 +20,26 @@ alias gad='git add .'
 alias gds='git diff --staged'
 alias gcur='git_current_branch'
 alias gdh='git diff HEAD~1..HEAD'
+alias gcom='git checkout origin/master'
+ggb() {
+    git grep -n "$1" | while IFS=: read i j k; do echo `git blame -f -L $j,$j $i`; done
+}
 
 ### Nim ###
-require nim && {
-    alias nr='nim c -r --verbosity:0 --threads:on'
-    function nimi {
-        nim c -d:release --threads:on "-o:$NIMBIN/"`basename "$1" .nim` "$1"
-    }
+alias nr='nim c -r --verbosity:0 --threads:on'
+function nimi {
+    nim c -d:release --threads:on "-o:$NIMBIN/"`basename "$1" .nim` "$1"
 }
 
-### NVIM ###
-require nvim && {
-    alias vi='nvim'
-    alias vim='nvim'
-    require nvr && {
-        alias vi='_nvim'
-        alias vim='_nvim'
-        function _nvim {
-            if [ "$NVIM_LISTEN_ADDRESS" = "" ]; then
-                nvim $@
-            else
-                # Making wild assumptions here
-                nvr -o $@
-            fi
-        }
-    }
-}
+### Dotfiles ###
+alias reload="source ~/.zshrc"
+alias editrc="$VISUAL ~/.zshrc; reload"
+alias vimrc="vim ~/.vimrc"
 
 ### Misc ###
+function i3se {
+    for l in `sudo cat /proc/$(pgrep -x i3)/environ | tr '\0' '\n' | grep SSH`; do export $l; done
+}
 
 require irssi run-one screen && function irc { screen -dRmS irc run-one irssi }
 

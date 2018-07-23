@@ -7,7 +7,7 @@
   title_inactive_fg_color = "#f0d0ab"
   title_receive_fg_color = "#000000"
   title_transmit_bg_color = "#09141b"
-  title_transmit_fg_color = "#ead1b4"
+  title_transmit_fg_color = "#fff8f0"
   title_use_system_font = False
 [keybindings]
   broadcast_all = None
@@ -47,11 +47,12 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_color = "#09141b"
-    cursor_color = "#deb88d"
-    custom_command = /bin/zsh --login
+    background_color = "#020507"
+    background_image = None
+    cursor_color = "#fff5e8"
+    custom_command = '''zsh -c 'source ~/.zshrc && exec /usr/bin/nvim -c ":term zsh"''''
     font = Source Code Pro 12
-    foreground_color = "#deb88d"
+    foreground_color = "#ffdcb0"
     login_shell = True
     palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
     scrollback_lines = 5000
@@ -61,6 +62,7 @@
   [[visor]]
     background_color = "#09141b"
     background_darkness = 0.9
+    background_image = None
     cursor_color = "#deb88d"
     exit_action = restart
     font = Source Code Pro Light 14

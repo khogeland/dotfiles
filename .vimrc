@@ -52,6 +52,8 @@ let g:pathogen_disabled = []
 
 if !executable('nim')
     call add(g:pathogen_disabled, 'nvim-nim')
+else
+    nnoremap gD :vs \| NimDefinition<CR>
 endif
 
 if !has("nvim")
@@ -62,6 +64,10 @@ set switchbuf+=usetab,newtab
 nmap <c-t> :vs<bar>:b#<CR>
 
 execute pathogen#infect()
+
+if has("nvim")
+    call deoplete#enable()
+endif
 
 filetype plugin indent on
 set tabstop=4
@@ -86,6 +92,8 @@ endif
 
 autocmd! BufRead *.nim Neomake
 autocmd! BufWritePost *.nim Neomake
+autocmd! BufRead *.go Neomake
+autocmd! BufWritePost *.go Neomake
 "autocmd! BufWritePost *.java Neomake
 "let g:nvim_nim_enable_default_binds = 0
 
@@ -136,9 +144,7 @@ let g:ycm_semantic_triggers['nim'] = ['.']
 let g:ycm_auto_trigger = 0
 let g:ycm_min_num_identifier_candidate_chars = 2
 
-nnoremap <Leader>t :execute 'CommandT' fnameescape(getcwd())<CR>
-let g:CommandTAcceptSelectionSplitMap = "<CR>"
-let g:CommandTAcceptSelectionMap = "<C-CR>"
+nnoremap <Leader>t :execute 'Files' fnameescape(getcwd())<CR>
 
 if has('nvim')
     let $VISUAL = 'nvr -cc split --remote-wait'
@@ -175,3 +181,4 @@ function! ToggleStatusLines()
     endif
 endfunction
 
+let g:terminal_scrollback_buffer_size = 100000

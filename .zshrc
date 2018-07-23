@@ -14,27 +14,14 @@ function require_envs {
     return $rc
 }
 
-function require {
-    rc=0
-    silent=true
-    if [ "$1" = "-v" ]; then 
-        silent=false
-        shift
-    fi
-    for req in $@; do
-        type "$req" 2>&1 >/dev/null || {
-            rc=1
-            $silent || echo "Cannot find \"$req\" in path"
-        }
-    done
-    return $rc
-}
 ###########################################
 
-export VISUAL=vi
-require vim && export VISUAL=vim
-require nvim && export VISUAL=nvim
+export VISUAL=_nvim_launcher
 export EDITOR="$VISUAL"
+alias v="$EDITOR"
+alias vi="$EDITOR"
+alias vim="$EDITOR"
+alias nvim="$EDITOR"
 
 export SSH_KEY_PATH="~/.ssh/id_my"
 
@@ -475,3 +462,22 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# https://github.com/junegunn/fzf/issues/809
+[ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
+bindkey '^R' history-incremental-search-backward
+bindkey '^[^R' fzf-history-widget
+
+setopt extended_glob
+
+neovim_autocd() {
+    [[ $NVIM_LISTEN_ADDRESS ]] && (
+        if [ -z "$1" ]; then
+            ( neovim-autocd.py $$ & )
+        else
+            ( neovim-autocd.py $$ "$1" & )
+        fi
+    )
+}
+chpwd_functions+=( neovim_autocd )
+preexec_functions+=( neovim_autocd )
