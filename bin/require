@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+rc=0
+silent=true
+if [ "$1" = "-v" ]; then 
+    silent=false
+    shift
+fi
+for req in $@; do
+    type "$req" 2>&1 >/dev/null || {
+        rc=1
+        $silent || echo "Cannot find \"$req\" in path"
+    }
+done
+return $rc

@@ -9,6 +9,7 @@ bin/*
 !bin/git-divergence
 !bin/nvim-inner
 !bin/lock-i3-dunst
+!bin/require
 !bin/neovim-autocd.py
 
 !.git/
