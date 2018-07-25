@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+require nvim && {
+    require nvr && {
+        if [ "$NVIM_LISTEN_ADDRESS" = "" ]; then
+            nvim $@
+        else
+            nvr -cc tabedit --remote-wait +'set bufhidden=wipe' $@
+        fi
+    } || nvim $@
+} || vim $@

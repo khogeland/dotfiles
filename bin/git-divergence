@@ -1,0 +1,55 @@
+#!/bin/bash
+set -e
+branch() {
+    git branch 2>/dev/null | grep -e '^*' | tr -d '\* '
+}
+ensure_valid_ref() {
+    ref=$1
+    (
+        set +e
+        git rev-list --max-count=1 $ref -- > /dev/null
+        local rev_status=$?
+        if [[ $rev_status != 0 ]]; then
+            exit $rev_status 
+        fi
+    )
+}
+dump_diffs() {
+  echo " ->| $2..$3 |<- $1 in $3 but not in $2:"
+  git --no-pager log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative $2..$3 --
+}
+if [[ $# == 2 ]]; then
+    LOCAL=$1
+    REMOTE=$2
+elif [[ $# == 1 ]]; then
+    LOCAL=`branch`
+    REMOTE=$1
+else
+    LOCAL=`branch`
+    REMOTE=`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
+fi
+ensure_valid_ref $LOCAL
+ensure_valid_ref $REMOTE
+local_missing=`git log --oneline $LOCAL..$REMOTE | wc -l | tr -d ' '`
+remote_missing=`git log --oneline $REMOTE..$LOCAL | wc -l | tr -d ' '`
+if [ $local_missing != 0 -o $remote_missing != 0 ]; then
+  (
+    echo    "Summary"
+    echo -e "-------\n"
+    if [ $local_missing != 0 ]; then
+      echo "$local_missing missing from $LOCAL that are in $REMOTE"
+    else
+      echo "$LOCAL is up-to-date with $REMOTE"
+    fi
+    if [ $remote_missing != 0 ]; then
+      echo "$remote_missing missing from $REMOTE that are in $LOCAL"
+    else
+      echo "$REMOTE is up-to-date with $LOCAL"
+    fi
+    echo -e "\n(hit 'q' to continue)"
+  ) | less
+  [ $local_missing != 0 ] && dump_diffs $local_missing $LOCAL $REMOTE | less -R
+  [ $remote_missing != 0 ] && dump_diffs $remote_missing $REMOTE $LOCAL | less -R
+else
+  echo "$LOCAL and $REMOTE are identical"
+fi

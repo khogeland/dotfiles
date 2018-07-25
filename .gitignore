@@ -5,6 +5,9 @@
 !bin/
 bin/*
 !bin/greenclip
+!bin/_nvim_launcher
+!bin/git-divergence
+!bin/nvim-inner
 !bin/lock-i3-dunst
 !bin/neovim-autocd.py
 
