@@ -86,3 +86,6 @@
 [submodule ".vim/bundle/neco-syntax"]
 	path = .vim/bundle/neco-syntax
 	url = https://github.com/Shougo/neco-syntax
+[submodule ".vim/bundle/deoplete-go"]
+	path = .vim/bundle/deoplete-go
+	url = https://github.com/zchee/deoplete-go

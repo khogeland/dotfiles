@@ -87,3 +87,6 @@
 # include                 = 0.14_monster_glyphs.txt
 
 auto_butcher = true
+background_colour = magenta
+#foreground_colour = lightblue
+allow_extended_colours = true

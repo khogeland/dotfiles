@@ -10,6 +10,8 @@ for_window [title="terminator-visor"] floating enable
 for_window [title="terminator-visor"] move scratchpad
 for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] floating enable
 for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] move scratchpad
+for_window [title="RuneLite"] floating enable
+for_window [title="RuneLite"] move scratchpad
 for_window [title="^Dungeon Crawl Stone Soup (\d+\.)+\d+$"] resize set 1400 1200
 exec_always nitrogen --restore
 exec --no-startup-id terminator -T terminator-visor -p visor
@@ -73,6 +75,9 @@ bindsym Mod4+Shift+k exec --no-startup-id terminator -T terminator-visor -p viso
 
 bindsym Mod4+c exec i3-msg '[title="^Dungeon Crawl Stone Soup.+"] scratchpad show'
 bindsym Mod4+Shift+c exec /usr/games/crawl-tiles
+
+bindsym Mod4+y exec i3-msg '[title="RuneLite"] scratchpad show'
+bindsym Mod4+Shift+y exec /usr/games/runelite
 
 # kill focused window
 bindsym Mod4+Shift+q kill

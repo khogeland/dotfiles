@@ -38,6 +38,9 @@ function! RightWindowOrTab(column)
     endif
 endfunction
 
+" Prevent accidental bg
+noremap <C-z> <ESC>
+
 nnoremap <M-e> <C-w>j
 nnoremap <M-i> <C-w>k
 nnoremap <silent> <M-n> :call LeftWindowOrTab(screencol())<CR>
@@ -52,9 +55,9 @@ let g:pathogen_disabled = []
 
 if !executable('nim')
     call add(g:pathogen_disabled, 'nvim-nim')
-else
-    nnoremap gD :vs \| NimDefinition<CR>
 endif
+
+nnoremap gd :vs \| NimDefinition<CR>
 
 if !has("nvim")
     call add(g:pathogen_disabled, 'Neomake')
@@ -67,6 +70,11 @@ execute pathogen#infect()
 
 if has("nvim")
     call deoplete#enable()
+    " use tab to forward cycle
+    inoremap <silent><expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+    " use tab to backward cycle
+    "inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+    set scrollback=100000
 endif
 
 filetype plugin indent on
@@ -134,7 +142,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = { "type": "style" }
 
-au BufNewFile,BufRead *.nim set filetype=nim
+au BufNewFile,BufRead *.nim set filetype=nim tabstop=2 shiftwidth=2
+
+au BufNewFile,BufRead *.go set softtabstop=0 noexpandtab
+
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 if !exists('g:ycm_semantic_triggers')
@@ -182,3 +193,4 @@ function! ToggleStatusLines()
 endfunction
 
 let g:terminal_scrollback_buffer_size = 100000
+let g:SuperTabDefaultCompletionType = "<c-n>"

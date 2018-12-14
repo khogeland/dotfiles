@@ -327,7 +327,7 @@ function recsh {
     script -q -c "COPY_MODE=true $SHELL -i" /tmp/recsh
     # holy shit
     # the python part is probably possible to replace with a recursive regex, but... no thanks
-    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | python -c "import re; import sys; t = lambda l1: (lambda l2: l1 if l1 == l2 else t(l2))(re.sub('($|[^\b])\b','',l1)); print(t(sys.stdin.read()), end='')" | col -b | copy
+    tail -n +2 /tmp/recsh | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | python -c "import re; import sys; t = lambda l1: (lambda l2: l1 if l1 == l2 else t(l2))(re.sub('($|[^\b])\b','',l1)); print(t(sys.stdin.read()), end='')" | col -b | eval copy
     #rm /tmp/recsh
 }
 
