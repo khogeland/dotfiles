@@ -89,3 +89,9 @@
 [submodule ".vim/bundle/deoplete-go"]
 	path = .vim/bundle/deoplete-go
 	url = https://github.com/zchee/deoplete-go
+[submodule ".vim/bundle/neco-ghc"]
+	path = .vim/bundle/neco-ghc
+	url = https://github.com/eagletmt/neco-ghc
+[submodule ".vim/bundle/vim-go"]
+	path = .vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go

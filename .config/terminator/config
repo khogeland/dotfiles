@@ -50,14 +50,13 @@
     background_color = "#020507"
     background_image = None
     cursor_color = "#fff5e8"
-    custom_command = '''zsh -c 'source ~/.zshrc && exec /usr/bin/nvim -c ":term zsh"''''
+    custom_command = zsh
     font = Source Code Pro 12
     foreground_color = "#ffdcb0"
     login_shell = True
     palette = "#17384c:#d15123:#027c9b:#fca02f:#1e4950:#68d4f1:#50a3b5:#deb88d:#434b53:#d48678:#628d98:#fdd39f:#1bbcdd:#bbe3ee:#87acb4:#fee4ce"
     scrollback_lines = 5000
     scrollbar_position = hidden
-    use_custom_command = True
     use_system_font = False
   [[visor]]
     background_color = "#09141b"

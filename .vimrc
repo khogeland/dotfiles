@@ -66,6 +66,9 @@ endif
 set switchbuf+=usetab,newtab
 nmap <c-t> :vs<bar>:b#<CR>
 
+
+let g:nvim_nim_enable_default_binds = 0
+
 execute pathogen#infect()
 
 if has("nvim")
@@ -194,3 +197,15 @@ endfunction
 
 let g:terminal_scrollback_buffer_size = 100000
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+highlight LeadingSpace ctermbg=235 guibg=235
+match LeadingSpace /\S\@<! /
+autocmd BufRead * match LeadingSpace /\S\@<! /
+autocmd InsertChange * match LeadingSpace /\S\@<! /
+autocmd InsertChange term:* match LeadingSpace /ishouldreadthedocs/
+
+autocmd CompleteDone * pclose!
+let g:go_gocode_autobuild = 1
+let g:go_gocode_propose_source = 1
+let g:deoplete#sources#go#source_importer = 0
+let $VTE_VERSION="100"

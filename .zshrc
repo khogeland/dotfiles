@@ -444,6 +444,7 @@ function mac_startup {
 
 function linux_startup {
     alias copy="xclip -selection c"
+    [[ -s /usr/share/autojump/autojump.zsh ]] && . /usr/share/autojump/autojump.zsh
 }
 
 case "$OSTYPE" in
@@ -481,3 +482,4 @@ neovim_autocd() {
 }
 chpwd_functions+=( neovim_autocd )
 preexec_functions+=( neovim_autocd )
+

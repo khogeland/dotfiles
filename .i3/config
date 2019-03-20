@@ -226,6 +226,9 @@ mode "resize" {
 
 bindsym Mod4+r mode "resize"
 
+bindsym Mod4+Button5 --whole-window --border exec transset -p --dec 0.05 -m 0.1
+bindsym Mod4+Button4 --whole-window --border exec transset -p --inc 0.05 -m 0.1
+
 workspace 1 output DP-2
 workspace 2 output DP-0
 workspace 3 output DP-4
