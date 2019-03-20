@@ -147,7 +147,7 @@ let g:syntastic_quiet_messages = { "type": "style" }
 
 au BufNewFile,BufRead *.nim set filetype=nim tabstop=2 shiftwidth=2
 
-au BufNewFile,BufRead *.go set softtabstop=0 noexpandtab
+autocmd! BufRead *.go set softtabstop=0 noexpandtab
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1

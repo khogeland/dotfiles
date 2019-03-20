@@ -310,6 +310,8 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+export GPG_TTY=$(tty)
+
 function untgz {
     file="$1"
     contents=$(tar -tf "$file")
