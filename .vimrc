@@ -11,6 +11,7 @@ map <C-j> <Plug>(easymotion-f)
 nnoremap <Leader>w <C-w>
 nnoremap <Leader>w\ <C-w>\| <C-w>_
 nnoremap <Leader>W :InteractiveWindow<CR>
+nnoremap <Leader>o :NERDTreeToggle<CR>
 set clipboard=unnamed
 set nofoldenable
 set ignorecase
