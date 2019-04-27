@@ -27,7 +27,7 @@ export SSH_KEY_PATH="~/.ssh/id_my"
 
 # Private config (credentials etc.)
 if [ -e ~/.zprivate/key ]; then
-    openssl bf -d -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
+    openssl bf -d -md md5 -kfile ~/.zprivate/key -in ~/.zprivate/rc.enc | source /dev/stdin
 fi
 
 # Aliases
@@ -466,7 +466,7 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/junegunn/fzf/issues/809
 [ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
 bindkey '^R' history-incremental-search-backward
-bindkey '^[^R' fzf-history-widget
+#bindkey '^[^R' fzf-history-widget
 
 setopt extended_glob
 

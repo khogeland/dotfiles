@@ -11,6 +11,8 @@ map <C-j> <Plug>(easymotion-f)
 nnoremap <Leader>w <C-w>
 nnoremap <Leader>w\ <C-w>\| <C-w>_
 nnoremap <Leader>W :InteractiveWindow<CR>
+nnoremap <Leader>o :NERDTreeFocus<CR>
+nnoremap <Leader>l :CommandTLine<CR>
 set clipboard=unnamed
 set nofoldenable
 set ignorecase
@@ -194,3 +196,5 @@ endfunction
 
 let g:terminal_scrollback_buffer_size = 100000
 let g:SuperTabDefaultCompletionType = "<c-n>"
+au TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * startinsert
