@@ -68,6 +68,9 @@ endif
 set switchbuf+=usetab,newtab
 nmap <c-t> :vs<bar>:b#<CR>
 
+
+let g:nvim_nim_enable_default_binds = 0
+
 execute pathogen#infect()
 
 if has("nvim")
@@ -146,7 +149,7 @@ let g:syntastic_quiet_messages = { "type": "style" }
 
 au BufNewFile,BufRead *.nim set filetype=nim tabstop=2 shiftwidth=2
 
-au BufNewFile,BufRead *.go set softtabstop=0 noexpandtab
+autocmd! BufRead *.go set softtabstop=0 noexpandtab
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -198,3 +201,15 @@ let g:terminal_scrollback_buffer_size = 100000
 let g:SuperTabDefaultCompletionType = "<c-n>"
 au TermOpen * setlocal nonumber norelativenumber
 autocmd TermOpen * startinsert
+
+highlight LeadingSpace ctermbg=235 guibg=235
+match LeadingSpace /\S\@<! /
+autocmd BufRead * match LeadingSpace /\S\@<! /
+autocmd InsertChange * match LeadingSpace /\S\@<! /
+autocmd InsertChange term:* match LeadingSpace /ishouldreadthedocs/
+
+autocmd CompleteDone * pclose!
+let g:go_gocode_autobuild = 1
+let g:go_gocode_propose_source = 1
+let g:deoplete#sources#go#source_importer = 0
+let $VTE_VERSION="100"

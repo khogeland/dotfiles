@@ -310,6 +310,8 @@ export PATH="$PATH:$NIMBIN"
 
 ### Misc ###
 
+export GPG_TTY=$(tty)
+
 function untgz {
     file="$1"
     contents=$(tar -tf "$file")
@@ -444,6 +446,7 @@ function mac_startup {
 
 function linux_startup {
     alias copy="xclip -selection c"
+    [[ -s /usr/share/autojump/autojump.zsh ]] && . /usr/share/autojump/autojump.zsh
 }
 
 case "$OSTYPE" in
