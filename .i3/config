@@ -104,7 +104,7 @@ bindsym Mod4+Shift+Tab exec --no-startup-id skippy-xd
 bindsym Mod4+l exec --no-startup-id rofi -modi lpass:~/git/rofi-lpass/rofi-lpass -show lpass -i -config ~/.rofi/config
 bindsym Mod4+Shift+v exec --no-startup-id rofi -modi "clipboard:~/bin/greenclip print" -show clipboard -i -config ~/.rofi/config
 
-force_focus_wrapping yes
+force_focus_wrapping no
 
 bindsym Mod4+u exec --no-startup-id python3 ~/git/mouse-grid/mouse.py
 

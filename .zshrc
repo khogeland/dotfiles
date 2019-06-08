@@ -1,5 +1,5 @@
 # Messy ol' PATH
-export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin"
+export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin:$HOME/.cabal/bin"
 
 # Functions for command prerequisites ### 
 function require_envs {
@@ -37,7 +37,7 @@ source ~/.zsh_aliases
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_UPDATE="true"
-plugins=(git apache2-macports autojump bower dircycle history pip python sudo web-search colorize cp jvm alias-tips)
+plugins=(git apache2-macports autojump bower dircycle history pip python sudo colorize cp jvm alias-tips)
 source $ZSH/oh-my-zsh.sh
 autoload -z edit-command-line
 zle -N edit-command-line
@@ -383,7 +383,7 @@ function grepl {
 }
 
 function random-str {
-    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-8} | head -n 1
+    cat /dev/urandom | tr -dc 'a-z0-9' | fold -w ${1:-8} | head -n 1
 }
 
 export _SCRATCH_DIR="$HOME/.scratch"
