@@ -73,8 +73,8 @@ function git_commits_behind_master() {
     fi
 }
 
-export GIT_COLOR_DIRTY="%{$fg_bold[red]%}"
-export GIT_COLOR_CLEAN="%{$fg_bold[blue]%}"
+export GIT_COLOR_DIRTY="%{$fg[red]%}"
+export GIT_COLOR_CLEAN="%{$fg[cyan]%}"
 
 function _git_color() {
     if git diff-index --quiet HEAD -- >/dev/null 2>&1; then
@@ -107,8 +107,8 @@ function much_git_prompt_info() {
 }
 ### Prompt ###
 setopt PROMPT_SUBST
-export status_dollar="%(?:%{$fg_bold[blue]%}$:%{$fg_bold[red]%}$)%{$reset_color%}"
-export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"
+export status_dollar="%(?:%{$fg[magenta]%}$:%{$fg[red]%}$)%{$reset_color%}"
+export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}(%{$fg[red]%}"
 export PROMPT='%{$fg[yellow]%}%c%{$reset_color%} ${status_dollar} '
 
 export PERIOD=15
@@ -481,3 +481,5 @@ neovim_autocd() {
 }
 chpwd_functions+=( neovim_autocd )
 preexec_functions+=( neovim_autocd )
+
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
