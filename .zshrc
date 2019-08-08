@@ -37,7 +37,7 @@ source ~/.zsh_aliases
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_UPDATE="true"
-plugins=(git apache2-macports autojump bower dircycle history pip python sudo colorize cp jvm alias-tips)
+plugins=(git apache2-macports autojump bower dircycle colorize alias-tips)
 source $ZSH/oh-my-zsh.sh
 autoload -z edit-command-line
 zle -N edit-command-line
@@ -206,11 +206,6 @@ zle-keymap-select () {
 }
 
 #############
-
-### Python ###
-alias python=python3
-alias pip=pip3
-##############
 
 ### Go ###
 export GOPATH=$HOME/go

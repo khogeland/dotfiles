@@ -22,6 +22,7 @@ nnoremap <Leader>w\ <C-w>\| <C-w>_
 nnoremap <Leader>W :InteractiveWindow<CR>
 nnoremap <Leader>o :NERDTreeFocus<CR>
 nnoremap <Leader>e :lnext<CR>
+nnoremap <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>E :lprevious<CR>
 nnoremap <Leader>t :execute 'Files' fnameescape(getcwd())<CR>
 nnoremap <Leader>nr :! nim c -r --threads:on --verbosity:0 %<CR>
@@ -45,6 +46,7 @@ nnoremap <M-S-o> <C-w>L
 nnoremap <M-w> :InteractiveWindow<CR>
 nnoremap gd :vs \| NimDefinition<CR>
 
+let g:python3_host_prog = '/usr/bin/python3.7'
 python3 import vim
 
 function! LeftWindowOrTab(column)
@@ -332,3 +334,9 @@ let g:tagbar_type_go = {
 
 let g:tagbar_left = 1
 set splitbelow
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_enabled = 0
+augroup auto_gutentags
+  au FileType python,java,scala,sh,groovy,vim,go let g:gutentags_enabled=1
+augroup end
+set modelines=0

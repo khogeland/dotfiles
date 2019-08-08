@@ -5,6 +5,10 @@ require mvn && {
     alias mdt='mvn dependency:tree'
 }
 
+### Python ###
+alias python=python3.7
+alias pip="python3.7 -m pip"
+
 ### Sudo ###
 alias ,='sudo '
 alias ,,='history | tail -n 1 | cut -c 8- | sudo -i'
