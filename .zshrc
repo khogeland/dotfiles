@@ -37,7 +37,7 @@ source ~/.zsh_aliases
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_UPDATE="true"
-plugins=(git apache2-macports autojump bower dircycle colorize alias-tips)
+plugins=(git apache2-macports autojump bower dircycle colorize)
 source $ZSH/oh-my-zsh.sh
 autoload -z edit-command-line
 zle -N edit-command-line
@@ -318,6 +318,12 @@ function untgz {
         dirname=$(grep -oP ".+(?=\\.tar\\.gz|\\.tgz)") <<<"$filename"
         mkdir "$dirname" && tar -C "$dirname" -xzvf "$file"
     fi
+}
+
+unzd() {
+    if [[ $# != 1 ]]; then echo I need a single argument, the name of the archive to extract; return 1; fi
+    target="${1%.zip}"
+    unzip "$1" -d "${target##*/}"
 }
 
 function recsh {
