@@ -46,7 +46,7 @@ nnoremap <M-S-o> <C-w>L
 nnoremap <M-w> :InteractiveWindow<CR>
 nnoremap gd :vs \| NimDefinition<CR>
 
-let g:python3_host_prog = '/usr/bin/python3.7'
+let g:python3_host_prog = 'python3'
 python3 import vim
 
 function! LeftWindowOrTab(column)

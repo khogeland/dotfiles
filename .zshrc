@@ -440,8 +440,7 @@ function mac_startup {
         PATH=$(echo $PATH | tr ':' '\n' | grep -v Java | tr '\n' ':')
         export PATH=$JAVA_HOME/bin:$PATH
     }
-    setjdk 1.8
-    export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+    #export CURL_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
     alias copy="pbcopy"
 }
 
