@@ -58,6 +58,11 @@ function i3se {
     for l in `sudo cat /proc/$(pgrep -x i3)/environ | tr '\0' '\n' | grep SSH`; do export $l; done
 }
 
+function mcd {
+    mkdir -p $@
+    cd $@
+}
+
 require irssi run-one screen && function irc { screen -dRmS irc run-one irssi }
 
 require vim && alias vi='vim'
