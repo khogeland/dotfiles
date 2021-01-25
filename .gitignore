@@ -11,6 +11,7 @@ bin/*
 !bin/lock-i3-dunst
 !bin/require
 !bin/neovim-autocd.py
+!bin/setup-mac.sh
 
 !.git/
 !.gitignore
