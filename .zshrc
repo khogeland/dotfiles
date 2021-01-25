@@ -226,6 +226,7 @@ DEER_KEYS[enter]=o
 DEER_KEYS[leave]=n
 ############
 
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 ### Process utility ###
 

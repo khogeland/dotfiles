@@ -1,6 +1,9 @@
+" Here be dragons
+
 autocmd! bufwritepost .vimrc source %
 
 set rtp^=~/.vim/
+set rtp+=/usr/local/opt/fzf
 let mapleader = "\<Space>"
 
 set clipboard=unnamed
@@ -9,6 +12,7 @@ set ignorecase
 set smartcase
 set cursorline
 set wildignore+=*/target/*
+set nomodeline
 
 inoremap yy <ESC>
 tnoremap yy <C-\><C-n>
@@ -46,8 +50,7 @@ nnoremap <M-S-o> <C-w>L
 nnoremap <M-w> :InteractiveWindow<CR>
 nnoremap gd :vs \| NimDefinition<CR>
 
-let g:python3_host_prog = '/usr/bin/python3.7'
-python3 import vim
+let g:python3_host_prog = 'python3'
 
 function! LeftWindowOrTab(column)
     let orig = winnr()
@@ -108,6 +111,8 @@ endif
 
 if !has("nvim")
     call add(g:pathogen_disabled, 'Neomake')
+else
+    python3 import vim
 endif
 
 set switchbuf+=usetab,newtab
@@ -340,3 +345,6 @@ augroup auto_gutentags
   au FileType python,java,scala,sh,groovy,vim,go let g:gutentags_enabled=1
 augroup end
 set modelines=0
+let g:go_def_reuse_buffer = 1
+let g:go_def_mapping_enabled = 0
+nmap gd <Plug>(go-def-vertical)
