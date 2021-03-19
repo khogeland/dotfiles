@@ -1,5 +1,5 @@
 # Messy ol' PATH
-export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin:$HOME/.cabal/bin"
+export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.gem/ruby/3.0.0/bin"
 
 # Functions for command prerequisites ### 
 function require_envs {
@@ -41,7 +41,7 @@ plugins=(git apache2-macports autojump bower dircycle colorize)
 source $ZSH/oh-my-zsh.sh
 autoload -z edit-command-line
 zle -N edit-command-line
-bindkey "^Y" edit-command-line
+bindkey "^U" edit-command-line
 #################
 
 

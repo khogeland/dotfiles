@@ -104,3 +104,9 @@
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
 	url = https://github.com/preservim/tagbar
+[submodule ".vim/bundle/multiterm.vim"]
+	path = .vim/bundle/multiterm.vim
+	url = https://github.com/chengzeyi/multiterm.vim
+[submodule ".vim/bundle/vim-lsc"]
+	path = .vim/bundle/vim-lsc
+	url = https://github.com/natebosch/vim-lsc

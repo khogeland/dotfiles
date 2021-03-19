@@ -6,6 +6,11 @@ set rtp^=~/.vim/
 set rtp+=/usr/local/opt/fzf
 let mapleader = "\<Space>"
 
+call plug#begin()
+Plug 'https://github.com/natebosch/vim-lsc'
+call plug#end()
+
+set hidden
 set clipboard=unnamed
 set nofoldenable
 set ignorecase
@@ -36,6 +41,13 @@ nnoremap <Leader>no :NimOutline<CR>
 nnoremap <Leader>gc :GoReferrers<CR>
 nnoremap <Leader>jr :call JavaAskAndRename()<CR>
 nnoremap <Leader>jd :vert JavaSearchContext<CR>
+
+" COOL
+nnoremap <silent> <Leader>y :Multiterm!<CR>
+nnoremap <silent> <Leader>1 :1Multiterm!<CR>
+nnoremap <silent> <Leader>2 :2Multiterm!<CR>
+nnoremap <silent> <Leader>3 :3Multiterm!<CR>
+
 " Prevent accidental bg
 noremap <C-z> <ESC>
 
@@ -121,6 +133,10 @@ nmap <c-t> :vs<bar>:b#<CR>
 
 let g:nvim_nim_enable_default_binds = 0
 
+"let g:lsc_server_commands = {'ava': '/Users/khogeland/git/java-language-server/dist/lang_server_mac.sh'}
+let g:lsc_enable_autocomplete  = v:true
+let g:lsc_enable_diagnostics = v:true
+
 execute pathogen#infect()
 
 if has("nvim")
@@ -187,6 +203,8 @@ endfunction
 let g:EclimDefaultFileOpenAction = 'vsplit'
 
 au BufNewFile,BufRead *.nim set filetype=nim tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.bzl set tabstop=2 shiftwidth=2
+au BufNewFile,BufRead BUILD.* set tabstop=2 shiftwidth=2
 
 autocmd! BufRead *.go set softtabstop=0 noexpandtab
 

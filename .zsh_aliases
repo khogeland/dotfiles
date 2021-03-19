@@ -73,6 +73,10 @@ alias wh=whence
 alias psg='ps aux | grep -i'
 alias af='alias | grep'
 
+function gh {
+    grep -R $@ .
+}
+
 function t {
     type -a $@ | grep -q "shell function" && type -f $@ || type -a $@
 }
