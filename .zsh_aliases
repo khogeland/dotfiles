@@ -35,6 +35,7 @@ alias gcur='git_current_branch'
 alias gdh='git diff HEAD~1..HEAD'
 alias gcom='git checkout origin/master'
 alias grbas='git rebase --autostash'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "wip"'
 ggb() {
     git grep -n "$1" | while IFS=: read i j k; do echo `git blame -f -L $j,$j $i`; done
 }

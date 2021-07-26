@@ -18,6 +18,7 @@ set smartcase
 set cursorline
 set wildignore+=*/target/*
 set nomodeline
+set gdefault
 
 inoremap yy <ESC>
 tnoremap yy <C-\><C-n>
@@ -149,6 +150,8 @@ if has("nvim")
     au TermOpen * setlocal nonumber norelativenumber
 endif
 
+autocmd BufNewFile,BufRead BUILD.*   set syntax=bzl
+
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -169,6 +172,7 @@ if termapp=~"iTerm.app"
     let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
     let &t_EI = "\<Esc>]1337;CursorShape=0\x7"
 endif
+
 
 autocmd! BufRead *.nim Neomake
 autocmd! BufWritePost *.nim Neomake
