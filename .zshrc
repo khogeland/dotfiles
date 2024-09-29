@@ -1,5 +1,5 @@
 # Messy ol' PATH
-export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.gem/ruby/3.0.0/bin"
+export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/opt/wine-staging/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/local/lib/python2.7/site-packages:/usr/local/share/npm/bin:/usr/local/heroku/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/Library/Android/sdk/platform-tools:$HOME/.nimble/bin:$HOME/Nim/bin:$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.gem/ruby/3.0.0/bin:$HOME/.home_venv/bin"
 
 # Functions for command prerequisites ### 
 function require_envs {
@@ -15,6 +15,8 @@ function require_envs {
 }
 
 ###########################################
+
+[ -e /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export VISUAL=_nvim_launcher
 export EDITOR="$VISUAL"
@@ -36,7 +38,7 @@ source ~/.zsh_aliases
 ### oh-my-zsh ###
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
-#DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 plugins=(git apache2-macports autojump bower dircycle colorize)
 source $ZSH/oh-my-zsh.sh
 autoload -z edit-command-line
@@ -461,9 +463,6 @@ test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_in
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Machine-specific config
-[ -e ~/.zlocal ] && source ~/.zlocal
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -487,3 +486,7 @@ chpwd_functions+=( neovim_autocd )
 preexec_functions+=( neovim_autocd )
 
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+
+VIRTUAL_ENV_DISABLE_PROMPT=1 source $HOME/.home_venv/bin/activate
+
+[ -e ~/.zlocal ] && source ~/.zlocal
