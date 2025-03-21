@@ -1,3 +1,5 @@
+source ~/git/ez-compinit/ez-compinit.plugin.zsh
+
 source ~/.zpath
 source ~/.zsh_aliases
 source ~/.zlocal

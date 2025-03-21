@@ -110,3 +110,6 @@
 [submodule ".vim/bundle/vim-lsc"]
 	path = .vim/bundle/vim-lsc
 	url = https://github.com/natebosch/vim-lsc
+[submodule "git/ez-compinit"]
+	path = git/ez-compinit
+	url = https://github.com/mattmc3/ez-compinit
