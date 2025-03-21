@@ -143,14 +143,13 @@ unset -f mac_startup
 unset -f linux_startup
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source <(fzf --zsh)
 
 [ -e ~/.zsh_fzf ] || fzf --zsh > ~/.zsh_fzf
-fzf --zsh > ~/.zsh_fzf
+source ~/.zsh_fzf
 
 bindkey '^R' history-incremental-search-backward
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
 
 neovim_autocd() {
     [[ $NVIM_LISTEN_ADDRESS ]] && (
