@@ -1,0 +1,64 @@
+function tag_proc {
+    PID=$1
+    shift
+    ps -p "$PID" 2>&1 >/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Process $PID is not running."
+        return 1
+    fi
+    for tag; do
+        TAGDIR="$HOME/.proc/tag/$tag"
+        mkdir -p "$TAGDIR"
+        touch "$TAGDIR/$PID"
+    done
+}
+
+function get_tagged_procs { 
+    TAG=$1
+    TAGDIR="$HOME/.proc/tag/$TAG"
+    if [ ! -e "$TAGDIR" ]; then
+        echo "Tag $TAG does not exist."
+        return 1
+    fi
+    for pidfile in `find $TAGDIR -type f`; do
+        pid=$(basename "$pidfile")
+        ps -p "$pid" >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            rm -f "$pidfile"
+            continue
+        fi
+        echo $pid
+    done
+}
+
+### Music ###
+
+function music {
+    require -v mpd run-one mpdas ncmpcpp || return 1
+    mpd
+    run-one mpdas -d
+    ncmpcpp
+}
+
+function mpstart {
+    require_envs MPD_STREAM_ADDRESS || return 1
+    require -v mplayer || return 1
+    touch ~/.mpslck
+    _loop_mplayer >/dev/null 2>&1 & disown
+}
+
+function mpstop {
+    rm -f ~/.mpslck
+    pids=`get_tagged_procs mpd_processes`
+    [ $? ] && [ "$pids" != "" ] && echo $pids | xargs kill
+}
+
+function _loop_mplayer {
+    while [ -e ~/.mpslck ]; do
+        mplayer -noconsolecontrols -msglevel all=-1 -ao coreaudio $MPD_STREAM_ADDRESS -loop 0 &
+        tag_proc $! mpd_processes
+        get_tagged_procs mpd_processes >/dev/null
+        sleep 1
+        wait
+    done
+}

@@ -31,9 +31,10 @@ bin/*
 !.zsh/*
 !.zshrc
 !.zprofile
-!.zsh_aliases
+!.zsh_git
+!.zsh_mpd
+!.zsh_prompt
 !.oh-my-zsh
-!.fzf.zsh
 
 !.i3/
 .i3/*

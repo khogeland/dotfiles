@@ -1,32 +1,21 @@
-### Maven ###
-require mvn && {
-    alias mci='mvn clean install'
-    alias mcp='mvn clean package'
-    alias mdt='mvn dependency:tree'
-}
+alias ytdl "yt-dlp -x --audio-format mp3"
+
+alias mci='mvn clean install'
+alias mcp='mvn clean package'
+alias mdt='mvn dependency:tree'
 
 ### Python ###
-require python2 && {
-    alias python=python2
-    alias pip2="python2 -m pip"
-    alias pip=pip2
-}
-
-require python3 && {
-    alias python=python3
-    alias pip3="python3 -m pip"
-    alias pip=pip3
-}
+alias python=python3
+alias pip=pip3
+alias pip2="python2 -m pip"
+alias pip3="python3 -m pip"
 
 ### Sudo ###
-alias ,='sudo '
 alias ,,='history | tail -n 1 | cut -c 8- | sudo -i'
 
 ### Screen ###
-require screen && {
-    alias ssx='screen -x -S '
-    alias ss='screen -S '
-}
+alias ssx='screen -x -S '
+alias ss='screen -S '
 
 ### Git ###
 alias gad='git add .'
@@ -64,10 +53,14 @@ function mcd {
     cd $@
 }
 
-require irssi run-one screen && function irc { screen -dRmS irc run-one irssi }
+function irc { screen -dRmS irc run-one irssi }
 
-require vim && alias vi='vim'
-require rsync && alias rsyncp='rsync -avz --no-i-r --info=progress2'
+alias v=_nvim_launcher
+alias vi=_nvim_launcher
+alias vim=_nvim_launcher
+alias nvim=_nvim_launcher
+
+alias rsyncp='rsync -avz --no-i-r --info=progress2'
 alias c=clear
 alias re='grep -oP'
 alias wh=whence
@@ -90,6 +83,7 @@ function mac_aliases {
     alias chrome-dev="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
     alias flushdns="sudo discoveryutil mdnsflushcache"
     alias ij='open -b com.jetbrains.intellij.ce'
+    alias copy=pbcopy
 }
 
 case "$OSTYPE" in
