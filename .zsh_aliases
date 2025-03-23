@@ -1,4 +1,5 @@
-alias ytdl "yt-dlp -x --audio-format mp3"
+alias ytm="yt-dlp -x --audio-format mp3"
+alias yt="yt-dlp"
 
 alias mci='mvn clean install'
 alias mcp='mvn clean package'
