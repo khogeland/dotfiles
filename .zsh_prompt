@@ -1,9 +1,11 @@
+main_branch=`git_main_branch`
+
 function _git_fetch_origin() {
     if [[ ! -e '.git' || ! -d '.git' ]]; then
         return 0
     else
         ({
-            GIT_TERMINAL_PROMPT=0 git fetch origin main 2>/dev/null
+            GIT_TERMINAL_PROMPT=0 git fetch origin ${main_branch} 2>/dev/null
             touch .git/.last-origin-fetch
         } &)
     fi
@@ -12,7 +14,7 @@ function _git_fetch_origin() {
 function git_commits_ahead_main() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        local COMMITS="$(git rev-list --count origin/main..HEAD)" 2>/dev/null
+        local COMMITS="$(git rev-list --count origin/${main_branch}..HEAD)" 2>/dev/null
         echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
     fi
 }
@@ -20,7 +22,7 @@ function git_commits_ahead_main() {
 function git_commits_behind_main() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        echo $(git rev-list --count HEAD..origin/main) 2>/dev/null
+        echo $(git rev-list --count HEAD..origin/${main_branch}) 2>/dev/null
     fi
 }
 
