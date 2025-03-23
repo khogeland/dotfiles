@@ -2,6 +2,8 @@ source ~/git/ez-compinit/ez-compinit.plugin.zsh
 source ~/.zpath
 source ~/.zsh_aliases
 source ~/.zlocal
+source ~/.zsh_git
+source ~/.zsh_prompt
 
 export VISUAL=_nvim_launcher
 export EDITOR="$VISUAL"
@@ -161,9 +163,7 @@ preexec_functions+=( neovim_autocd )
 
 VIRTUAL_ENV_DISABLE_PROMPT=1 source $HOME/.home_venv/bin/activate
 
-source ~/.zsh_git
-
-source ~/.zsh_prompt
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
