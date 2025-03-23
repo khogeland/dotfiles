@@ -1,5 +1,4 @@
 source ~/git/ez-compinit/ez-compinit.plugin.zsh
-
 source ~/.zpath
 source ~/.zsh_aliases
 source ~/.zlocal
@@ -142,8 +141,6 @@ esac
 unset -f mac_startup
 unset -f linux_startup
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 [ -e ~/.zsh_fzf ] || fzf --zsh > ~/.zsh_fzf
 source ~/.zsh_fzf
 
@@ -163,8 +160,10 @@ neovim_autocd() {
 chpwd_functions+=( neovim_autocd )
 preexec_functions+=( neovim_autocd )
 
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 
 VIRTUAL_ENV_DISABLE_PROMPT=1 source $HOME/.home_venv/bin/activate
 
 source ~/.zsh_git
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'

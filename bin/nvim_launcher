@@ -6,5 +6,5 @@ require nvim && {
         else
             nvr -cc tabedit --remote-wait +'set bufhidden=wipe' $@
         fi
-    } || nvim $@
-} || vim $@
+    } || exec nvim $@
+} || exec vim $@

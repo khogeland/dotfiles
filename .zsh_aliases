@@ -55,10 +55,10 @@ function mcd {
 
 function irc { screen -dRmS irc run-one irssi }
 
-alias v=_nvim_launcher
-alias vi=_nvim_launcher
-alias vim=_nvim_launcher
-alias nvim=_nvim_launcher
+alias v=nvim_launcher
+alias vi=nvim_launcher
+alias vim=nvim_launcher
+alias nvim=nvim_launcher
 
 alias rsyncp='rsync -avz --no-i-r --info=progress2'
 alias c=clear

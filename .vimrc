@@ -20,6 +20,9 @@ set wildignore+=*/target/*
 set nomodeline
 set gdefault
 
+nnoremap <Left> <C-w>>
+nnoremap <Right> <C-w><
+
 inoremap yy <ESC>
 tnoremap yy <C-\><C-n>
 vnoremap <ESC> <C-c>
