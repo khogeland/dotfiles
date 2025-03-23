@@ -163,7 +163,9 @@ preexec_functions+=( neovim_autocd )
 
 VIRTUAL_ENV_DISABLE_PROMPT=1 source $HOME/.home_venv/bin/activate
 
+zmodload -i zsh/complist
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
