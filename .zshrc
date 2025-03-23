@@ -22,8 +22,6 @@ bindkey "^U" edit-command-line
 
 autoload -U colors && colors
 
-source ~/.zsh_prompt
-
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
 source ~/.zsh/deer/deer
@@ -164,6 +162,8 @@ preexec_functions+=( neovim_autocd )
 VIRTUAL_ENV_DISABLE_PROMPT=1 source $HOME/.home_venv/bin/activate
 
 source ~/.zsh_git
+
+source ~/.zsh_prompt
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
