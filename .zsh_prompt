@@ -3,24 +3,24 @@ function _git_fetch_origin() {
         return 0
     else
         ({
-            GIT_TERMINAL_PROMPT=0 git fetch origin master 2>/dev/null
+            GIT_TERMINAL_PROMPT=0 git fetch origin main 2>/dev/null
             touch .git/.last-origin-fetch
         } &)
     fi
 }
 
-function git_commits_ahead_master() {
+function git_commits_ahead_main() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        local COMMITS="$(git rev-list --count origin/master..HEAD)" 2>/dev/null
+        local COMMITS="$(git rev-list --count origin/main..HEAD)" 2>/dev/null
         echo "$ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX$COMMITS$ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX"
     fi
 }
 
-function git_commits_behind_master() {
+function git_commits_behind_main() {
     if $(command git rev-parse --git-dir > /dev/null 2>&1)
     then
-        echo $(git rev-list --count HEAD..origin/master) 2>/dev/null
+        echo $(git rev-list --count HEAD..origin/main) 2>/dev/null
     fi
 }
 
@@ -35,7 +35,7 @@ function _git_color() {
     fi
 }
 
-# git info prompt that shows commits head and behind master
+# git info prompt that shows commits head and behind main
 function much_git_prompt_info() {
     local ref
     if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]
@@ -43,12 +43,12 @@ function much_git_prompt_info() {
         ref=$(command git symbolic-ref HEAD 2> /dev/null)  || ref=$(command git rev-parse --short HEAD 2> /dev/null)  || return 0
         color_one="$(_git_color)"
         color_two="%{$reset_color%}%{$fg[green]%}"
-        BEHIND=${$(git_commits_behind_master 2>/dev/null):-0}
+        BEHIND=${$(git_commits_behind_main 2>/dev/null):-0}
         BEHIND_PROMPT=
         if [ $BEHIND -gt 0 ]; then
             BEHIND_PROMPT="${GIT_COLOR_DIRTY}$BEHIND${color_two}:"
         fi
-        AHEAD=${$(git_commits_ahead_master 2>/dev/null):-0}
+        AHEAD=${$(git_commits_ahead_main 2>/dev/null):-0}
         AHEAD_PROMPT=
         if [ $AHEAD -gt 0 ]; then
             AHEAD_PROMPT="${color_two}:${color_one}$AHEAD"
